@@ -1,0 +1,22 @@
+$mainBlack: black;
+$lightBlack: rgba(30, 30, 30, .9);
+$mainWhite: white;
+$navbar-item-color: $mainWhite;
+$navbar-item-hover-color: $mainWhite;
+$navbar-item-hover-background-color: $lightBlack;
+
+@import "../../node_modules/bulma/bulma";
+
+body {
+  height: 100vh;
+  background-color: $lightBlack;
+
+  .navbar {
+    background-color: $mainBlack;
+    padding: 10px;
+
+    .navbar-brand.logoContainer img {
+      max-height: none !important;
+    }
+  }
+}

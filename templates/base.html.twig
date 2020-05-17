@@ -1,12 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>iZap4u – {% block title %}Voyage à la vitesse de l'esprit{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('styles.min.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand logoContainer">
+                <a href="javascript:void(0);" class="navbar-item">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo iZap4u" height="45">
+                </a>
+            </div>
+
+            <div class="navbar-menu is-block bannerContainer">
+                <a href="{{ path('app_homepage_index') }}" class="navbar-item has-text-centered is-block">
+                    <img src="{{ asset('images/banner.png') }}" alt="Bannière iZap4u">
+                </a>
+            </div>
+
+            <div class="navbar-end customerLinks">
+                <a href="" class="navbar-item login">S'identifier</a>
+                <a href="" class="navbar-item signup">S'inscrire</a>
+            </div>
+        </nav>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <script src="{{ asset('scripts.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

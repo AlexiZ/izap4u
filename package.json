@@ -1,0 +1,31 @@
+{
+  "name": "izap4u",
+  "version": "0.1.0",
+  "description": "izap4u.com",
+  "main": "public/assets/main.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "bulma": "^0.8.2"
+  },
+  "devDependencies": {
+    "grunt": "^1.1.0",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "node-sass": "^4.14.1"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexiZ/izap4u.git"
+  },
+  "author": "AlexiZ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexiZ/izap4u/issues"
+  },
+  "homepage": "https://github.com/AlexiZ/izap4u#readme"
+}

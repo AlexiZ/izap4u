@@ -1,5 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block stylesheets %}
+    <style>
+        #latestZap {
+            background-image: linear-gradient(to left, rgba(0,0,0, 0), rgba(0,0,0, 0.8)), url('{{ latestZap|default ? asset('images/thumbnails/' ~ latestZap.thumbnail) : 'https://place-hold.it/640x450' }}');
+            background-position: center;
+            margin-top: -0.75rem;
+        }
+    </style>
+{% endblock %}
 
+{% block body %}
+    <div class="container">
+        <div class="columns is-variable is-8">
+            <div class="column is-two-thirds">
+                <div class="columns" id="latestZap">
+                    <div class="column is-two-fifths">
+                        <h1 class="title">{{ latestZap.title|default('Zap #000') }}</h1>
+                        <h2 class="subtitle">{{ latestZap.subtitle|default('Lorem ipsum dolor sit amet') }}</h2>
+                        <p class="shortDescription">{{ latestZap.shortDescription|default('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus auctor risus neque, molestie cursus odio scelerisque non. Nam ut hendrerit eros. Phasellus at accumsan nisi. Sed eu libero risus. Vivamus vulputate luctus sem at hendrerit. Praesent ac est mauris. Pellentesque maximus viverra sapien quis sodales. Aliquam tincidunt dolor vel mauris euismod, non tristique ex luctus.')|u.truncate(400, '...') }}</p>
+                        <p class="details">{{ latestZap.viewCount|default(0) }} vues | {{ latestZap.publishedAt|default('now')|date('d.m.Y') }}</p>
+                    </div>
+                </div>
+
+                <div class="columns">
+                    <div class="column is-full">Don</div>
+                </div>
+
+                <div class="columns">
+                    <div class="column is-half">Newsletter</div>
+                    <div class="column is-half">Share</div>
+                </div>
+
+                <div class="columns">
+                    <div class="column is-half">Full</div>
+                    <div class="column is-half">Short</div>
+                </div>
+            </div>
+
+            <div class="column is-one-third has-text-centered">
+                <h2 class="title">Images</h2>
+            </div>
+        </div>
+    </div>
 {% endblock %}

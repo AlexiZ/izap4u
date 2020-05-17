@@ -1,14 +1,23 @@
+/* Custom functions */
+@import "functions";
+
+/* Custom variables */
 $mainBlack: black;
 $lightBlack: rgba(30, 30, 30, .9);
 $mainWhite: white;
+$orange: #C45F51;
+
+/* Bulma overrides */
+$text: $mainWhite;
 $navbar-item-color: $mainWhite;
 $navbar-item-hover-color: $mainWhite;
 $navbar-item-hover-background-color: $lightBlack;
+$section-padding: 5rem 1.5rem;
 
 @import "../../node_modules/bulma/bulma";
 
 body {
-  height: 100vh;
+  height: 100%;
   background-color: $lightBlack;
 
   .navbar {
@@ -17,6 +26,43 @@ body {
 
     .navbar-brand.logoContainer img {
       max-height: none !important;
+    }
+  }
+
+  .section {
+    .container {
+      .columns, .column {
+        margin-top: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .title {
+        text-transform: capitalize;
+        text-shadow: stroke(1, $orange);
+        font-size: 3rem;
+        font-style: italic;
+      }
+
+      #latestZap .column {
+        .subtitle {
+          text-transform: capitalize;
+          font-weight: 600;
+          font-size: 1.5rem;
+          margin-top: 10px;
+        }
+
+        .shortDescription {
+          text-align: justify;
+          font-size: 1rem;
+          margin-top: 10px;
+        }
+
+        .details {
+          font-weight: 600;
+          font-style: italic;
+          margin-top: 10px;
+        }
+      }
     }
   }
 }

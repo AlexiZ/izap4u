@@ -20,8 +20,8 @@ return new class extends DefaultDeployer
             ->useSshAgentForwarding(true)
             ->remoteComposerBinaryPath('php7.3-cli /kunden/homepages/39/d655277423/htdocs/izap4u/composer.phar')
             ->remotePhpBinaryPath('php7.3-cli')
-//            ->composerInstallFlags('--prefer-dist --no-interaction --no-progress --optimize-autoloader --apcu-autoloader')
             ->symfonyEnvironment('prod')
+            ->sharedFilesAndDirs(['.env', 'var/log'])
         ;
     }
 

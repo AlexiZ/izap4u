@@ -6970,14 +6970,20 @@ body {
     background-color: black;
     padding: 10px; }
     body .navbar * {
-      visibility: visible; }
+      visibility: visible;
+      z-index: 12; }
     body .navbar .navbar-brand.logoContainer img {
       max-height: none !important; }
-    body .navbar:focus-within .navbar-brand {
+    body .navbar .navbar-brand:focus-within {
       pointer-events: none; }
-    body .navbar:focus-within #nav-content {
+      body .navbar .navbar-brand:focus-within + #nav-content {
+        transform: none; }
+      body .navbar .navbar-brand:focus-within + #nav-overlay {
+        display: block; }
+    body .navbar #nav-content:focus-within {
       transform: none; }
     body .navbar #nav-content {
+      z-index: 11;
       margin-top: 70px;
       padding: 20px;
       width: 90%;
@@ -6993,18 +6999,33 @@ body {
       transition: transform .3s;
       will-change: transform;
       contain: paint; }
+      body .navbar #nav-content input {
+        border-radius: unset;
+        margin-bottom: 20px;
+        border-color: rgba(100, 100, 100, 0.5); }
       body .navbar #nav-content ul {
         height: 100%;
         display: flex;
         flex-direction: column; }
-      body .navbar #nav-content li:nth-child(even) {
-        background-color: rgba(202, 202, 202, 0.8); }
-      body .navbar #nav-content li a {
-        padding: 10px 5px;
-        display: block;
-        text-transform: uppercase;
-        transition: color .1s;
-        color: black !important; }
+      body .navbar #nav-content li {
+        border-bottom: rgba(100, 100, 100, 0.5) 1px solid; }
+        body .navbar #nav-content li:hover {
+          background-color: rgba(202, 202, 202, 0.8); }
+        body .navbar #nav-content li a {
+          padding: 10px 5px;
+          display: block;
+          text-transform: uppercase;
+          transition: color .1s;
+          color: black !important; }
+    body .navbar #nav-overlay {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      position: fixed;
+      left: 0;
+      z-index: 10;
+      background-color: rgba(0, 0, 0, 0.5); }
   body .section .container .columns, body .section .container .column {
     margin-top: 0.5rem;
     margin-bottom: 0.75rem; }
@@ -7062,7 +7083,9 @@ body {
     body .section .container #newsletter input {
       border-radius: unset;
       border: none;
-      background-color: rgba(202, 202, 202, 0.8); }
+      background-color: rgba(239, 239, 239, 0.9); }
+      body .section .container #newsletter input::placeholder {
+        color: black; }
   body .section .container #share {
     margin-top: 0;
     margin-bottom: 0;

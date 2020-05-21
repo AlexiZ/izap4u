@@ -6,6 +6,7 @@ $mainBlack: black;
 $lightBlack: rgba(0, 0, 0, 0.9);
 $greyBlack: rgba(100, 100, 100, 0.5);
 $mainWhite: white;
+$lightWhite: rgba(239, 239, 239, 0.9);
 $darkWhite: rgba(202, 202, 202, 0.8);
 $orange: #b3685d;
 
@@ -30,22 +31,31 @@ body {
 
     * {
       visibility: visible;
+      z-index: 12;
     }
 
     .navbar-brand.logoContainer img {
       max-height: none !important;
     }
 
-    &:focus-within {
-      .navbar-brand {
-        pointer-events: none;
-      }
-      #nav-content {
+    .navbar-brand:focus-within {
+      pointer-events: none;
+
+      + #nav-content {
         transform: none;
+      }
+
+      + #nav-overlay {
+        display: block;
       }
     }
 
+    #nav-content:focus-within {
+      transform: none;
+    }
+
     #nav-content {
+      z-index: 11;
       margin-top: 70px;
       padding: 20px;
       width: 90%;
@@ -62,6 +72,12 @@ body {
       will-change: transform;
       contain: paint;
 
+      input {
+        border-radius: unset;
+        margin-bottom: 20px;
+        border-color: $greyBlack;
+      }
+
       ul {
         height: 100%;
         display: flex;
@@ -69,9 +85,12 @@ body {
       }
 
       li {
-        &:nth-child(even) {
+        border-bottom: $greyBlack 1px solid;
+
+        &:hover {
           background-color: $darkWhite;
         }
+
         a {
           padding: 10px 5px;
           display: block;
@@ -80,6 +99,17 @@ body {
           color: $mainBlack !important;
         }
       }
+    }
+
+    #nav-overlay {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      position: fixed;
+      left: 0;
+      z-index: 10;
+      background-color: rgba(0, 0, 0, .5);
     }
   }
 
@@ -169,7 +199,11 @@ body {
         input {
           border-radius: unset;
           border: none;
-          background-color: $darkWhite;
+          background-color: $lightWhite;
+
+          &::placeholder {
+            color: $mainBlack;
+          }
         }
       }
 

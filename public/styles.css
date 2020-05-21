@@ -6982,7 +6982,8 @@ body {
     color: rgba(0, 0, 0, 0.9); }
   body .section .container #latestZap {
     background-position: center;
-    margin-top: -0.75rem; }
+    margin-top: -0.75rem;
+    padding-left: 20px; }
     body .section .container #latestZap .column .subtitle {
       font-weight: 600;
       font-size: 1.5rem;

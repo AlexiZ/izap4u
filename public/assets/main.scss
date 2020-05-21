@@ -6,7 +6,7 @@ $mainBlack: black;
 $lightBlack: rgba(0, 0, 0, 0.9);
 $greyBlack: rgba(100, 100, 100, 0.5);
 $mainWhite: white;
-$darkWhite: rgba(255, 255, 255, 0.8);
+$darkWhite: rgba(202, 202, 202, 0.8);
 $orange: #b3685d;
 
 /* Bulma overrides */
@@ -28,8 +28,58 @@ body {
     background-color: $mainBlack;
     padding: 10px;
 
+    * {
+      visibility: visible;
+    }
+
     .navbar-brand.logoContainer img {
       max-height: none !important;
+    }
+
+    &:focus-within {
+      .navbar-brand {
+        pointer-events: none;
+      }
+      #nav-content {
+        transform: none;
+      }
+    }
+
+    #nav-content {
+      margin-top: 70px;
+      padding: 20px;
+      width: 90%;
+      max-width: 300px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: calc(100vh - 70px);
+      background: $white;
+      pointer-events: auto;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+      transform: translateX(-100%);
+      transition: transform .3s;
+      will-change: transform;
+      contain: paint;
+
+      ul {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+
+      li {
+        &:nth-child(even) {
+          background-color: $darkWhite;
+        }
+        a {
+          padding: 10px 5px;
+          display: block;
+          text-transform: uppercase;
+          transition: color .1s;
+          color: $mainBlack !important;
+        }
+      }
     }
   }
 

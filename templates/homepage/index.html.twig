@@ -4,8 +4,9 @@
     <style>
         #latestZap {
             background-image: linear-gradient(to left, rgba(0,0,0, 0), rgba(0,0,0, 0.8)), url('{{ latestZap|default ? asset('images/thumbnails/' ~ latestZap.thumbnail) : 'https://place-hold.it/640x450' }}');
-            background-position: center;
-            margin-top: -0.75rem;
+        }
+        .progressionBar {
+            width: {{ donationPercentage|default(30) }}%;
         }
     </style>
 {% endblock %}
@@ -16,30 +17,74 @@
             <div class="column is-two-thirds">
                 <div class="columns" id="latestZap">
                     <div class="column is-two-fifths">
-                        <h1 class="title">{{ latestZap.title|default('Zap #000') }}</h1>
-                        <h2 class="subtitle">{{ latestZap.subtitle|default('Lorem ipsum dolor sit amet') }}</h2>
-                        <p class="shortDescription">{{ latestZap.shortDescription|default('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus auctor risus neque, molestie cursus odio scelerisque non. Nam ut hendrerit eros. Phasellus at accumsan nisi. Sed eu libero risus. Vivamus vulputate luctus sem at hendrerit. Praesent ac est mauris. Pellentesque maximus viverra sapien quis sodales. Aliquam tincidunt dolor vel mauris euismod, non tristique ex luctus.')|u.truncate(400, '...') }}</p>
-                        <p class="details">{{ latestZap.viewCount|default(0) }} vues | {{ latestZap.publishedAt|default('now')|date('d.m.Y') }}</p>
+                        <h1 class="title">{{ latestZap.title|default('ZAP #000')|u.upper }}</h1>
+                        <h2 class="subtitle">{{ latestZap.subtitle|default('lipsum.short'|trans) }}</h2>
+                        <p class="shortDescription">{{ latestZap.shortDescription|default('lipsum.long'|trans)|u.truncate(400, '...') }}</p>
+                        <p class="details"><span>{{ 'homepage.latest_zap.details'|trans({'%views%': latestZap.viewCount|default(0)}) }}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>{{ latestZap.publishedAt|default('now')|date('d.m.Y') }}</span></p>
                     </div>
                 </div>
 
                 <div class="columns">
-                    <div class="column is-full">Don</div>
+                    <div class="column is-full has-text-centered" id="donation">
+                        <p class="has-text-weight-bold is-italic">{{ 'homepage.donation.title'|trans|u.upper }}</p>
+                        <p class="is-italic"><small>{{ 'homepage.donation.current_month'|trans|u.upper }}</small></p>
+                        <div class="progression">
+                            <span class="progressionBar"></span>
+                            <span class="progressionText">{{ donationPercentage|default(30) }}%</span>
+                            <span class="is-clearfix"></span>
+                        </div>
+                        <a class="has-text-weight-bold" href="#">{{ 'homepage.donation.donate'|trans|u.upper }}</a>
+                    </div>
                 </div>
 
                 <div class="columns">
-                    <div class="column is-half">Newsletter</div>
-                    <div class="column is-half">Share</div>
+                    <div class="column is-half" id="newsletter">
+                        <form action="">
+                            <div class="field has-addons">
+                                <p class="control newsletterTitle">
+                                    <span>{{ 'homepage.newsletter.title'|trans|u.upper }}</span>
+                                </p>
+
+                                <p class="control is-expanded">
+                                    <input class="input" type="text" placeholder="{{ 'homepage.newsletter.placeholder'|trans }}">
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="column is-half" id="share">
+                        <h2 class="title">{{ 'homepage.share.title'|trans|u.upper }}</h2>
+                        <a href="https://fr-fr.facebook.com/IZap4u/"><img src="{{ asset('images/facebook.svg') }}" alt="Facebook" class="social"></a>
+                        <a href="https://twitter.com/iZap4u_com"><img src="{{ asset('images/twitter.svg') }}" alt="Facebook" class="social"></a>
+                        <a href="https://www.instagram.com/__www.izap4u.com__/"><img src="{{ asset('images/instagram.svg') }}" alt="Facebook" class="social"></a>
+                        <span class="is-clearfix"></span>
+                    </div>
                 </div>
 
-                <div class="columns">
-                    <div class="column is-half">Full</div>
-                    <div class="column is-half">Short</div>
+                <div class="columns" id="versions">
+                    <div class="column is-half has-text-centered" id="FullVersion">
+                        <h2 class="title">{{ 'homepage.full_version.title'|trans|u.upper }}</h2>
+                        <img src="{{ latestFullVersion|default ? asset('images/thumbnails/' ~ latestFullVersion.path) : 'https://place-hold.it/400x250' }}" alt="">
+                    </div>
+                    <div class="column is-half has-text-centered" id="shortEdit">
+                        <h2 class="title">{{ 'homepage.short_edit.title'|trans|u.upper }}</h2>
+                        <img src="{{ latestShortVersion|default ? asset('images/thumbnails/' ~ latestShortVersion.path) : 'https://place-hold.it/400x250' }}" alt="">
+                    </div>
                 </div>
             </div>
 
             <div class="column is-one-third has-text-centered">
-                <h2 class="title">Images</h2>
+                <h2 class="title">{{ 'homepage.images.title'|trans|u.upper }}</h2>
+                <div id="images">
+                    {% if latestImages|default %}
+                        {% for latestImage in latestImages %}
+                            <img src="{{ asset('images/uploads/' ~ latestImage.path) }}" alt="{{ latestImage.title }}">
+                        {% endfor %}
+                    {% else %}
+                        <img src="https://place-hold.it/400x600" alt="Default image">
+                        <img src="https://place-hold.it/400x600" alt="Default image">
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

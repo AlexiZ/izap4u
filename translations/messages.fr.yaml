@@ -1,0 +1,23 @@
+lipsum:
+  short: Lorem ipsum dolor sit amet
+  long: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus auctor risus neque, molestie cursus odio scelerisque non. Nam ut hendrerit eros. Phasellus at accumsan nisi. Sed eu libero risus. Vivamus vulputate luctus sem at hendrerit. Praesent ac est mauris. Pellentesque maximus viverra sapien quis sodales. Aliquam tincidunt dolor vel mauris euismod, non tristique ex luctus.
+
+homepage:
+  latest_zap:
+    title: "Zap #000"
+    details: "%views% vues"
+  donation:
+    title: Ce site n'affiche aucune publicité et fonctionne uniquement grâce à vos dons
+    current_month: Mois en cours
+    donate: Clique ici pour participer
+  newsletter:
+    title: Newsletter
+    placeholder: Email
+  share:
+    title: Share
+  full_version:
+    title: Full version
+  short_edit:
+    title: Short edit
+  images:
+    title: Images

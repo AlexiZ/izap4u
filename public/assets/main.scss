@@ -3,9 +3,11 @@
 
 /* Custom variables */
 $mainBlack: black;
-$lightBlack: rgba(30, 30, 30, .9);
+$lightBlack: rgba(0, 0, 0, 0.9);
+$greyBlack: rgba(100, 100, 100, 0.5);
 $mainWhite: white;
-$orange: #C45F51;
+$darkWhite: rgba(255, 255, 255, 0.8);
+$orange: #b3685d;
 
 /* Bulma overrides */
 $text: $mainWhite;
@@ -13,6 +15,8 @@ $navbar-item-color: $mainWhite;
 $navbar-item-hover-color: $mainWhite;
 $navbar-item-hover-background-color: $lightBlack;
 $section-padding: 5rem 1.5rem;
+$link: $mainWhite;
+$link-hover: $mainWhite;
 
 @import "../../node_modules/bulma/bulma";
 
@@ -37,30 +41,109 @@ body {
       }
 
       .title {
-        text-transform: capitalize;
         text-shadow: stroke(1, $orange);
         font-size: 3rem;
         font-style: italic;
+        font-weight: 800;
+        color: $lightBlack;
       }
 
-      #latestZap .column {
-        .subtitle {
-          text-transform: capitalize;
-          font-weight: 600;
-          font-size: 1.5rem;
-          margin-top: 10px;
+      #latestZap {
+        background-position: center;
+        margin-top: -0.75rem;
+
+        .column {
+          .subtitle {
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-top: 10px;
+          }
+
+          .shortDescription {
+            text-align: justify;
+            font-size: 1rem;
+            margin-top: 10px;
+          }
+
+          .details {
+            font-weight: 600;
+            margin-top: 10px;
+
+            span {
+              font-style: italic;
+            }
+          }
+        }
+      }
+
+      #donation {
+        background-color: $mainBlack;
+        border: $orange 2px solid;
+        box-sizing: border-box;
+
+        .progression {
+          margin-bottom: 10px;
+
+          .progressionBar {
+            height: 30px;
+            display: block;
+            background-color: $orange;
+            float: left;
+          }
+
+          .progressionText {
+            float: left;
+            margin-left: 10px;
+            text-shadow: stroke(1, $orange);
+            font-size: 2rem;
+            font-style: italic;
+            font-weight: 800;
+            line-height: 1.7rem;
+            color: $lightBlack;
+          }
+        }
+      }
+
+      #newsletter {
+        padding-left: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+
+        .newsletterTitle {
+          padding: 8px 30px;
+          background-color: $greyBlack;
+          font-weight: 800;
         }
 
-        .shortDescription {
-          text-align: justify;
-          font-size: 1rem;
-          margin-top: 10px;
+        input {
+          border-radius: unset;
+          border: none;
+          background-color: $darkWhite;
         }
+      }
 
-        .details {
-          font-weight: 600;
-          font-style: italic;
-          margin-top: 10px;
+      #share {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+
+        h2 {
+          float: left;
+          margin-right: 30px;
+        }
+        .social {
+          width: 50px;
+          float: left;
+          margin-left: 10px;
+        }
+      }
+
+      #versions {
+        margin-top: 0;
+
+        .column {
+          padding-left: 0;
+          padding-right: 0;
         }
       }
     }

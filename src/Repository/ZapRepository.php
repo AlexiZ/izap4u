@@ -19,32 +19,21 @@ class ZapRepository extends ServiceEntityRepository
         parent::__construct($registry, Zap::class);
     }
 
-    // /**
-    //  * @return Zap[] Returns an array of Zap objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Latest zap by publication date
+     *
+     * @return Zap|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getLatest(): ?Zap
     {
         return $this->createQueryBuilder('z')
-            ->andWhere('z.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('z.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Zap
-    {
-        return $this->createQueryBuilder('z')
-            ->andWhere('z.exampleField = :val')
-            ->setParameter('val', $value)
+            ->where('z.status = :status')
+            ->setParameter('status', Zap::STATUS_PUBLISHED)
+            ->orderBy('z.publishedAt', 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;
     }
-    */
 }

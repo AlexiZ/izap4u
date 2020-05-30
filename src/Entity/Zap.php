@@ -10,6 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Zap
 {
+    const STATUS_DRAFT = 'draft';
+    const STATUS_PUBLISHED = 'published';
+    const STATUS_ARCHIVED = 'archived';
+    const STATUS_DELETED = 'deleted';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -71,6 +76,18 @@ class Zap
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $publishedAt;
+
+    public static $statusValues = [
+        self::STATUS_DRAFT => 'zap.status.draft',
+        self::STATUS_PUBLISHED => 'zap.status.published',
+        self::STATUS_ARCHIVED => 'zap.status.archived',
+        self::STATUS_DELETED => 'zap.status.deleted',
+    ];
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 
     public function getId(): ?int
     {
@@ -192,7 +209,9 @@ class Zap
 
     public function setStatus(string $status): self
     {
-        $this->status = $status;
+        if (in_array($status, self::$statusValues)) {
+            $this->status = $status;
+        }
 
         return $this;
     }

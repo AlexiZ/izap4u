@@ -1,6 +1,8 @@
 .idea
 node_modules
 .sass-cache
+public/adminer.php
+.env
 
 ###> symfony/framework-bundle ###
 /.env.local

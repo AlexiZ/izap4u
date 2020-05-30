@@ -2,7 +2,7 @@
 node_modules
 .sass-cache
 public/adminer.php
-.env
+public/images/uploads
 
 ###> symfony/framework-bundle ###
 /.env.local

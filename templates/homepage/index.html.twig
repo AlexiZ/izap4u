@@ -3,7 +3,7 @@
 {% block stylesheets %}
     <style>
         #latestZap {
-            background-image: linear-gradient(to left, rgba(0,0,0, 0), rgba(0,0,0, 0.8)), url('{{ latestZap|default ? asset('images/thumbnails/' ~ latestZap.thumbnail) : 'https://place-hold.it/640x450' }}');
+            background-image: url('{{ latestZap|default ? asset(latestZap.thumbnail) : 'https://place-hold.it/640x450' }}');
         }
         .progressionBar {
             width: {{ donationPercentage|default(30) }}%;
@@ -15,10 +15,10 @@
     <div class="container">
         <div class="columns is-variable">
             <div class="column is-two-thirds">
-                <div class="columns" id="latestZap">
+                <div class="columns fakeHref" id="latestZap" data-href="{{ path('app_zap_show', {'zapId': latestZap.id}) }}">
                     <div class="column is-two-fifths">
                         <h1 class="title">{{ latestZap.title|default('ZAP #000')|u.upper }}</h1>
-                        <h2 class="subtitle">{{ latestZap.subtitle|default('lipsum.short'|trans) }}</h2>
+                        <h2 class="subtitle">{{ latestZap.subtitle|default('lipsum.short'|trans)|u.upper }}</h2>
                         <p class="shortDescription">{{ latestZap.shortDescription|default('lipsum.long'|trans)|u.truncate(400, '...') }}</p>
                         <p class="details"><span>{{ 'homepage.latest_zap.details'|trans({'%views%': latestZap.viewCount|default(0)}) }}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>{{ latestZap.publishedAt|default('now')|date('d.m.Y') }}</span></p>
                     </div>

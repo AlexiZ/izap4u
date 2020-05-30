@@ -21,3 +21,10 @@ homepage:
     title: Short edit
   images:
     title: Images
+
+zap:
+  status:
+    draft: Brouillon
+    published: Publié
+    archived: Archivé
+    deleted: Supprimé

@@ -7037,21 +7037,26 @@ body {
     color: rgba(0, 0, 0, 0.9); }
   body .section .container #latestZap {
     background-position: center;
+    background-size: contain;
+    height: 450px;
     margin-top: -0.75rem;
-    padding-left: 20px; }
-    body .section .container #latestZap .column .subtitle {
-      font-weight: 600;
-      font-size: 1.5rem;
-      margin-top: 10px; }
-    body .section .container #latestZap .column .shortDescription {
-      text-align: justify;
-      font-size: 1rem;
-      margin-top: 10px; }
-    body .section .container #latestZap .column .details {
-      font-weight: 600;
-      margin-top: 10px; }
-      body .section .container #latestZap .column .details span {
-        font-style: italic; }
+    cursor: pointer; }
+    body .section .container #latestZap .column {
+      background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8)); }
+      body .section .container #latestZap .column .subtitle {
+        font-weight: 600;
+        font-size: 1.5rem;
+        margin-top: 10px; }
+      body .section .container #latestZap .column .shortDescription {
+        text-align: justify;
+        font-size: 1rem;
+        margin-top: 10px;
+        line-height: 1.2rem; }
+      body .section .container #latestZap .column .details {
+        font-weight: 600;
+        margin-top: 10px; }
+        body .section .container #latestZap .column .details span {
+          font-style: italic; }
   body .section .container #donation {
     background-color: black;
     border: #b3685d 2px solid;

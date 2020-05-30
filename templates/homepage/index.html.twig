@@ -15,7 +15,7 @@
     <div class="container">
         <div class="columns is-variable">
             <div class="column is-two-thirds">
-                <div class="columns fakeHref" id="latestZap" data-href="{{ path('app_zap_show', {'zapId': latestZap.id}) }}">
+                <div class="columns fakeHref" id="latestZap" data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}">
                     <div class="column is-two-fifths">
                         <h1 class="title">{{ latestZap.title|default('ZAP #000')|u.upper }}</h1>
                         <h2 class="subtitle">{{ latestZap.subtitle|default('lipsum.short'|trans)|u.upper }}</h2>

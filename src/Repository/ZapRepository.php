@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\PublishableTrait;
 use App\Entity\Zap;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -29,7 +30,7 @@ class ZapRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('z')
             ->where('z.status = :status')
-            ->setParameter('status', Zap::STATUS_PUBLISHED)
+            ->setParameter('status', PublishableTrait::$STATUS_PUBLISHED)
             ->orderBy('z.publishedAt', 'DESC')
             ->setMaxResults(1)
             ->getQuery()

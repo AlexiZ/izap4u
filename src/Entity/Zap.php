@@ -12,6 +12,9 @@ class Zap
 {
     use PublishableTrait, ViewableTrait;
 
+    const TYPE_LONG = 'long';
+    const TYPE_SHORT = 'short';
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -38,6 +41,16 @@ class Zap
      * @ORM\Column(type="string", length=255)
      */
     private $thumbnail;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $type;
+
+    public static $typeValues = [
+        self::TYPE_SHORT => 'zap.type.short',
+        self::TYPE_LONG => 'zap.type.long',
+    ];
 
 
     public function __toString()
@@ -94,6 +107,18 @@ class Zap
     public function setThumbnail(string $thumbnail): self
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

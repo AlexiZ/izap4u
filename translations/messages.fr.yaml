@@ -28,3 +28,6 @@ zap:
     published: Publié
     archived: Archivé
     deleted: Supprimé
+  type:
+    short: Version courte
+    long: Version longue

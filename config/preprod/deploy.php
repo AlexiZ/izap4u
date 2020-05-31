@@ -30,4 +30,10 @@ return new class extends DefaultDeployer
         $this->log('Remote composer dump autoload');
         $this->runRemote(sprintf('%s dump-autoload', $this->getConfig(Option::remoteComposerBinaryPath)));
     }
+
+    public function beforeFinishingDeploy()
+    {
+        $this->runRemote('{{ console_bin }} doctrine:migrations:migrate');
+        $this->runLocal('say "Migrations have been executed."');
+    }
 };

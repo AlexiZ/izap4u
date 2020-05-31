@@ -34,6 +34,6 @@ return new class extends DefaultDeployer
     public function beforeFinishingDeploy()
     {
         $this->runRemote('{{ console_bin }} doctrine:migrations:migrate');
-        $this->runLocal('say "Migrations have been executed."');
+        $this->log('Migrations have been executed.');
     }
 };

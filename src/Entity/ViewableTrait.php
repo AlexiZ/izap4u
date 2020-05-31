@@ -14,6 +14,11 @@ trait ViewableTrait
      */
     private $likes;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $link;
+
 
     public function getViews(): ?int
     {
@@ -35,6 +40,18 @@ trait ViewableTrait
     public function setLikes(int $likes): self
     {
         $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(string $link): self
+    {
+        $this->link = $link;
 
         return $this;
     }

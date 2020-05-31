@@ -45,12 +45,12 @@ class Zap
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $link;
+    private $type;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private $type;
+    private $duration;
 
     public static $typeValues = [
         self::TYPE_SHORT => 'zap.type.short',
@@ -116,18 +116,6 @@ class Zap
         return $this;
     }
 
-    public function getLink(): ?string
-    {
-        return $this->link;
-    }
-
-    public function setLink(string $link): self
-    {
-        $this->link = $link;
-
-        return $this;
-    }
-
     public function getType(): ?string
     {
         return $this->type;
@@ -138,6 +126,18 @@ class Zap
         if (in_array($type, self::$typeValues)) {
             $this->type = $type;
         }
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }

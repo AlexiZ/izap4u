@@ -35,7 +35,7 @@ trait PublishableTrait
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $updatedBy;
 
@@ -54,7 +54,7 @@ trait PublishableTrait
             self::$STATUS_DELETED => 'zap.status.deleted',
         ];
 
-        if (in_array($status, $statusValues)) {
+        if (in_array($status, array_keys($statusValues))) {
             $this->status = $status;
         }
 

@@ -58,6 +58,31 @@ class Zap
     ];
 
 
+    public function __construct($data = null)
+    {
+        $this->setCreatedAt(new \DateTime());
+
+        if ($data) {
+            $this->setTitle($data['title'] ?? null);
+            $this->setSubtitle($data['subtitle']);
+            $this->setShortDescription($data['short_description']);
+            $this->setThumbnail($data['thumbnail']);
+            $this->setType($data['type']);
+            $this->setDuration($data['duration']);
+            $this->setLikes($data['likes']);
+            $this->setLink($data['link']);
+            $this->setStatus($data['status']);
+            $this->setViews($data['views']);
+            $this->setCreatedBy($data['created_by']);
+            try {
+                $this->setPublishedAt(new \DateTime(strtotime($data['published_at'])));
+                $this->setCreatedAt(new \DateTime(strtotime($data['created_at'])));
+            } catch (\Exception $e) {}
+        }
+
+         return $this;
+    }
+
     public function __toString()
     {
         return $this->getTitle();
@@ -123,7 +148,7 @@ class Zap
 
     public function setType(string $type): self
     {
-        if (in_array($type, self::$typeValues)) {
+        if (in_array($type, array_keys(self::$typeValues))) {
             $this->type = $type;
         }
 

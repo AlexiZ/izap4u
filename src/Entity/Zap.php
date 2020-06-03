@@ -75,8 +75,8 @@ class Zap
             $this->setViews($data['views']);
             $this->setCreatedBy($data['created_by']);
             try {
-                $this->setPublishedAt(new \DateTime(strtotime($data['published_at'])));
-                $this->setCreatedAt(new \DateTime(strtotime($data['created_at'])));
+                $this->setPublishedAt(new \DateTime((date('Y-m-d H:i:s', strtotime($data['published_at'] ?? 'one year ago')))));
+                $this->setCreatedAt(new \DateTime((date('Y-m-d H:i:s', strtotime($data['created_at'] ?? 'now')))));
             } catch (\Exception $e) {}
         }
 

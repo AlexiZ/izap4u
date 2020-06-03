@@ -100,6 +100,10 @@ class ZapController extends AbstractController
                         $record['thumbnail'] = $thumbnail;
                     }
 
+                    // Remove unnecessary text in title
+                    preg_match('/Zap #\d+/', $record['title'], $matches);
+                    $record['title'] = $matches[0] ?? $record['title'];
+
                     $zap = new Zap($record);
 
                     $this->getDoctrine()->getManager()->persist($zap);

@@ -26,11 +26,13 @@ class ZapRepository extends ServiceEntityRepository
      * @return Zap|null
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getLatest(): ?Zap
+    public function getLatest($type = 'long'): ?Zap
     {
         return $this->createQueryBuilder('z')
             ->where('z.status = :status')
             ->setParameter('status', PublishableTrait::$STATUS_PUBLISHED)
+            ->andWhere('z.type = :type')
+            ->setParameter('type', $type)
             ->orderBy('z.publishedAt', 'DESC')
             ->setMaxResults(1)
             ->getQuery()

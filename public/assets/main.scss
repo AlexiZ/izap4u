@@ -118,6 +118,10 @@ body {
       .columns, .column {
         margin-top: 0.5rem;
         margin-bottom: 0.75rem;
+
+        .fakeHref {
+          cursor: pointer;
+        }
       }
 
       .title {
@@ -133,7 +137,6 @@ body {
         background-size: contain;
         height: 450px;
         margin-top: -0.75rem;
-        cursor: pointer;
 
         .column {
           background: linear-gradient(to left, rgba(0,0,0, 0), rgba(0,0,0, 0.8));

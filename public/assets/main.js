@@ -31,12 +31,20 @@ const makeItLoadable = infiniteScroll => {
     if (infiniteScrolls) {
         window.addEventListener('scroll', () => {
             infiniteScrolls.forEach(infiniteScroll => {
+                // XHR in progress, stop here
                 if (xhr.readyState > 0 && xhr.readyState < 4) {
+                    return;
+                }
+
+                // no proper dataset, stop here
+                if (!infiniteScroll.dataset.visible || !infiniteScroll.dataset.callable || !infiniteScroll.dataset.type || !infiniteScroll.dataset.zapidfrom) {
                     return;
                 }
 
                 // Change "visible" dataset for infinite loading elements
                 makeItLoadable(infiniteScroll);
+
+                let url = '/zap/infinite/' + infiniteScroll.dataset.type + '/' + infiniteScroll.dataset.zapidfrom;
 
                 // If infinite bloc isn't already working and XHR is unsent
                 if ('true' === infiniteScroll.dataset.visible && 'true' === infiniteScroll.dataset.callable) {
@@ -46,12 +54,21 @@ const makeItLoadable = infiniteScroll => {
                     }
 
                     if (0 === xhr.readyState) {
+                        xhr.responseType = 'json';
                         xhr.onreadystatechange = () => {
                             if (4 === xhr.readyState) {
+                                let nextZap = xhr.response[0],
+                                    nextZapImage = document.createElement('img')
+                                ;
+                                if (nextZap) {
+                                    nextZapImage.src = 'images/uploads/' + nextZap['thumbnail'];
+                                    infiniteScroll.appendChild(nextZapImage);
+                                }
+
                                 infiniteScroll.dataset.callable = 'true';
                             }
                         };
-                        xhr.open("GET", "yourFile.txt", true);
+                        xhr.open("GET", url, true);
                         xhr.send();
                     }
                 }

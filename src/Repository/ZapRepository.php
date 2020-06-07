@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\PublishableTrait;
 use App\Entity\Zap;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -23,10 +24,11 @@ class ZapRepository extends ServiceEntityRepository
     /**
      * Latest zap by publication date
      *
+     * @param string $type
      * @return Zap|null
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NonUniqueResultException
      */
-    public function getLatest($type = 'long'): ?Zap
+    public function getLatest(string $type = 'long'): ?Zap
     {
         return $this->createQueryBuilder('z')
             ->where('z.status = :status')
@@ -37,6 +39,33 @@ class ZapRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * @param string $type
+     * @param int|null $zapIdFrom
+     * @return array|null
+     */
+    public function getLatestByType(string $type = 'long', int $zapIdFrom = null): ?array
+    {
+        $qb = $this->createQueryBuilder('z')
+            ->where('z.type = :type')
+            ->setParameter('type', $type)
+            ->orderBy('z.publishedAt', 'DESC')
+            ->setMaxResults(1)
+        ;
+
+        if ($zapIdFrom) {
+            $qb
+                ->andWhere('z.id < :zapIdFrom')
+                ->setParameter('zapIdFrom', $zapIdFrom)
+            ;
+        }
+
+        return $qb
+            ->getQuery()
+            ->getArrayResult()
         ;
     }
 }

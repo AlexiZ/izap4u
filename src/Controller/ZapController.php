@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ZapController extends AbstractController
 {
     /**
-     * @Route("/zap/{zapId}", methods={"GET","HEAD"})
+     * @Route("/zap/show/{zapId}", methods={"GET","HEAD"})
      *
      * @param int $zapId
      * @return Response
@@ -28,6 +29,18 @@ class ZapController extends AbstractController
         return $this->render('zap/show.html.twig', [
             'zap' => $this->getDoctrine()->getRepository('App:Zap')->find($zapId),
         ]);
+    }
+
+    /**
+     * @Route("/zap/infinite/{type}/{zapIdFrom}", methods={"GET","HEAD"})
+     *
+     * @param string $type
+     * @param int|null $zapIdFrom
+     * @return JsonResponse
+     */
+    public function infinite(string $type, int $zapIdFrom = null)
+    {
+        return new JsonResponse($this->getDoctrine()->getRepository('App:Zap')->getLatestByType($type, $zapIdFrom));
     }
 
     /**

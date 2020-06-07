@@ -64,13 +64,13 @@
                 <div class="columns" id="versions">
                     <div class="column is-half has-text-centered fakeHref" id="FullVersion" data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}">
                         <h2 class="title">{{ 'homepage.full_version.title'|trans|u.upper }}</h2>
-                        <div class="infiniteScroll" data-visible="false" data-callable="true">
+                        <div class="infiniteScroll" data-visible="false" data-callable="true" data-type="long" data-zapidfrom="{{ latestZap.id }}">
                             <img src="{{ latestZap|default ? asset('images/uploads/' ~ latestZap.thumbnail) : 'https://place-hold.it/400x250' }}" alt="">
                         </div>
                     </div>
                     <div class="column is-half has-text-centered" id="shortEdit">
                         <h2 class="title">{{ 'homepage.short_edit.title'|trans|u.upper }}</h2>
-                        <div>
+                        <div class="infiniteScroll" data-visible="false" data-callable="true" data-type="type">
                             <img src="{{ latestShortVersion|default ? asset('images/thumbnails/' ~ latestShortVersion.path) : 'https://place-hold.it/400x250' }}" alt="">
                         </div>
                     </div>

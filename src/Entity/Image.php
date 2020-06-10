@@ -34,6 +34,27 @@ class Image
      */
     private $viewCount;
 
+
+    public function __construct($data = null)
+    {
+        $this->setCreatedAt(new \DateTime());
+
+        if ($data) {
+            $this->setTitle($data['title'] ?? null);
+            $this->setPath($data['thumbnail']);
+            $this->setLikes((int) $data['likes']);
+            $this->setStatus($data['status']);
+            $this->setViews((int) $data['views']);
+            $this->setCreatedBy($data['created_by']);
+            try {
+                $this->setPublishedAt(new \DateTime((date('Y-m-d H:i:s', strtotime($data['published_at'] ?? 'one year ago')))));
+                $this->setCreatedAt(new \DateTime((date('Y-m-d H:i:s', strtotime($data['created_at'] ?? 'now')))));
+            } catch (\Exception $e) {}
+        }
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

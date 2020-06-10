@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Image;
 use App\Entity\Zap;
 use League\Csv\Exception;
 use League\Csv\Reader;
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-class ZapController extends AbstractController
+class ImageController extends AbstractController
 {
     /**
      * @Route("/zap/show/{zapId}", methods={"GET","HEAD"})
@@ -32,19 +33,18 @@ class ZapController extends AbstractController
     }
 
     /**
-     * @Route("/zap/infinite/{type}/{zapIdFrom}", methods={"GET","HEAD"})
+     * @Route("/image/infinite/{imageIdFrom}", methods={"GET","HEAD"})
      *
-     * @param string $type
-     * @param int|null $zapIdFrom
+     * @param int|null $imageIdFrom
      * @return JsonResponse
      */
-    public function infinite(string $type, int $zapIdFrom = null)
+    public function infinite(int $imageIdFrom = null)
     {
-        return new JsonResponse($this->getDoctrine()->getRepository('App:Zap')->getLatestByType($type, $zapIdFrom));
+        return new JsonResponse($this->getDoctrine()->getRepository('App:Image')->getLatestById($imageIdFrom));
     }
 
     /**
-     * @Route("/import/zaps/{token}")
+     * @Route("/import/images/{token}")
      *
      * @param $token
      * @param Request $request
@@ -95,14 +95,6 @@ class ZapController extends AbstractController
 
                 $records = $stmt->process($csv);
                 foreach ($records as $record) {
-                    // Convert string duration XXHXX to minutes as integer
-                    $duration = 0;
-                    if ($record['duration']) {
-                        list($hour, $minute) = explode('H', $record['duration']);
-                        $duration = ((int) $hour * 60) + $minute;
-                    }
-                    $record['duration'] = $duration;
-
                     // Download thumbnail
                     if ($record['thumbnail']) {
                         $thumbnail = $slugger->slug($record['title']) . '.jpg';
@@ -114,13 +106,9 @@ class ZapController extends AbstractController
                         $record['thumbnail'] = $thumbnail;
                     }
 
-                    // Remove unnecessary text in title
-                    preg_match('/Zap #\d+/', $record['title'], $matches);
-                    $record['title'] = $matches[0] ?? $record['title'];
+                    $image = new Image($record);
 
-                    $zap = new Zap($record);
-
-                    $this->getDoctrine()->getManager()->persist($zap);
+                    $this->getDoctrine()->getManager()->persist($image);
                 }
                 $this->getDoctrine()->getManager()->flush();
 

@@ -52,6 +52,11 @@ class Zap
      */
     private $duration;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $link;
+
     public static $typeValues = [
         self::TYPE_SHORT => 'zap.type.short',
         self::TYPE_LONG => 'zap.type.long',
@@ -69,10 +74,10 @@ class Zap
             $this->setThumbnail($data['thumbnail']);
             $this->setType($data['type']);
             $this->setDuration($data['duration']);
-            $this->setLikes($data['likes']);
+            $this->setLikes((int) $data['likes']);
             $this->setLink($data['link']);
             $this->setStatus($data['status']);
-            $this->setViews($data['views']);
+            $this->setViews((int) $data['views']);
             $this->setCreatedBy($data['created_by']);
             try {
                 $this->setPublishedAt(new \DateTime((date('Y-m-d H:i:s', strtotime($data['published_at'] ?? 'one year ago')))));
@@ -163,6 +168,18 @@ class Zap
     public function setDuration(int $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(string $link): self
+    {
+        $this->link = $link;
 
         return $this;
     }

@@ -16,7 +16,8 @@ class HomepageController extends AbstractController
     public function index()
     {
         return $this->render('homepage/index.html.twig', [
-            'latestZap' => $this->getDoctrine()->getRepository('App:Zap')->getLatest(),
+            'latestZap'   => $this->getDoctrine()->getRepository('App:Zap')->getLatest(),
+            'latestImage' => null,
         ]);
     }
 }

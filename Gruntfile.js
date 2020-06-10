@@ -27,11 +27,11 @@ module.exports = function(grunt) {
         },
         watch: {
             styles: {
-                files: ['public/assets/main.scss'],
+                files: ['public/assets/*.scss'],
                 tasks: ['sass', 'cssmin']
             },
             scripts: {
-                files: ['public/assets/main.js'],
+                files: ['public/assets/*.js'],
                 tasks: ['uglify']
             }
         }

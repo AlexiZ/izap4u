@@ -62,16 +62,18 @@
                 </div>
 
                 <div class="columns" id="versions">
-                    <div class="column is-half has-text-centered fakeHref" id="FullVersion" data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}">
+                    <div class="column is-half has-text-centered" id="FullVersion">
                         <h2 class="title">{{ 'homepage.full_version.title'|trans|u.upper }}</h2>
-                        <div class="infiniteScroll" data-visible="false" data-callable="true" data-type="long" data-zapidfrom="{{ latestZap.id }}">
-                            <img src="{{ latestZap|default ? asset('images/uploads/' ~ latestZap.thumbnail) : 'https://place-hold.it/400x250' }}" alt="">
+                        <div>
+                            <img src="{{ latestZap|default ? asset('images/uploads/' ~ latestZap.thumbnail) : 'https://place-hold.it/400x250' }}" data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}" class="fakeHref" alt="{{ latestZap.title }}">
+                            <div class="lds-ripple infiniteZap" data-type="long" data-latestzapid="{{ latestZap.id }}"><div></div><div></div></div>
                         </div>
                     </div>
                     <div class="column is-half has-text-centered" id="shortEdit">
                         <h2 class="title">{{ 'homepage.short_edit.title'|trans|u.upper }}</h2>
-                        <div class="infiniteScroll" data-visible="false" data-callable="true" data-type="type">
+                        <div>
                             <img src="{{ latestShortVersion|default ? asset('images/thumbnails/' ~ latestShortVersion.path) : 'https://place-hold.it/400x250' }}" alt="">
+                            <div class="lds-ripple infiniteZap" data-type="short" data-latestzapid="{{ latestZap.id }}"><div></div><div></div></div>
                         </div>
                     </div>
                 </div>
@@ -79,15 +81,15 @@
 
             <div class="column is-one-third has-text-centered">
                 <h2 class="title">{{ 'homepage.images.title'|trans|u.upper }}</h2>
-                <div id="images" class="infiniteScroll">
+                <div id="images">
                     {% if latestImages|default %}
                         {% for latestImage in latestImages %}
                             <img src="{{ asset('images/uploads/' ~ latestImage.path) }}" alt="{{ latestImage.title }}">
                         {% endfor %}
                     {% else %}
                         <img src="https://place-hold.it/400x600" alt="Default image">
-                        <img src="https://place-hold.it/400x600" alt="Default image">
                     {% endif %}
+                    <div class="lds-ripple infiniteImage" data-latestimageid="{{ latestImage.id|default }}"><div></div><div></div></div>
                 </div>
             </div>
         </div>

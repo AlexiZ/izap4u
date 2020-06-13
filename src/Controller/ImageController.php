@@ -103,7 +103,7 @@ class ImageController extends AbstractController
                         } catch (\Exception $e) {
                             continue;
                         }
-                        $record['thumbnail'] = $thumbnail;
+                        $record['image'] = $thumbnail;
                     }
 
                     $image = new Image($record);

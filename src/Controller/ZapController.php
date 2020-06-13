@@ -111,7 +111,7 @@ class ZapController extends AbstractController
                         } catch (\Exception $e) {
                             continue;
                         }
-                        $record['thumbnail'] = $thumbnail;
+                        $record['image'] = $thumbnail;
                     }
 
                     // Remove unnecessary text in title

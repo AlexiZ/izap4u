@@ -27,12 +27,7 @@ class Image
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $path;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $viewCount;
+    private $image;
 
 
     public function __construct($data = null)
@@ -41,7 +36,7 @@ class Image
 
         if ($data) {
             $this->setTitle($data['title'] ?? null);
-            $this->setPath($data['thumbnail']);
+            $this->setImage($data['image']);
             $this->setLikes((int) $data['likes']);
             $this->setStatus($data['status']);
             $this->setViews((int) $data['views']);
@@ -72,26 +67,14 @@ class Image
         return $this;
     }
 
-    public function getPath(): ?string
+    public function getImage(): ?string
     {
-        return $this->path;
+        return $this->image;
     }
 
-    public function setPath(string $path): self
+    public function setImage(string $image): self
     {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    public function getViewCount(): ?int
-    {
-        return $this->viewCount;
-    }
-
-    public function setViewCount(int $viewCount): self
-    {
-        $this->viewCount = $viewCount;
+        $this->image = $image;
 
         return $this;
     }

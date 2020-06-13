@@ -3,7 +3,7 @@
 {% block stylesheets %}
     <style>
         #latestZap {
-            background-image: url('{{ latestZap|default ? asset('images/uploads/' ~ latestZap.thumbnail) : 'https://place-hold.it/640x450' }}');
+            background-image: url('{{ latestZap|default ? asset('images/zaps/' ~ latestZap.image) : 'https://place-hold.it/640x450' }}');
         }
         .progressionBar {
             width: {{ donationPercentage|default(30) }}%;
@@ -65,15 +65,22 @@
                     <div class="column is-half has-text-centered" id="FullVersion">
                         <h2 class="title">{{ 'homepage.full_version.title'|trans|u.upper }}</h2>
                         <div>
-                            <img src="{{ latestZap|default ? asset('images/uploads/' ~ latestZap.thumbnail) : 'https://place-hold.it/400x250' }}" data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}" class="fakeHref" alt="{{ latestZap.title }}">
-                            <div class="lds-ripple infiniteZap" data-type="long" data-latestzapid="{{ latestZap.id }}"><div></div><div></div></div>
+                            <img src="{{ latestZap|default ? asset('images/zaps/' ~ latestZap.image) : 'https://place-hold.it/400x250' }}"
+                                 data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}"
+                                 class="fakeHref"
+                                 alt="{{ latestZap.title }}">
+                            <div class="lds-ripple infiniteData"
+                                 data-imagepath="{{ directory_zaps }}"
+                                 data-url="{{ path('app_zap_infinite', {'zapIdFrom': latestZap.id, 'type': 'long'}) }}"><div></div><div></div></div>
                         </div>
                     </div>
                     <div class="column is-half has-text-centered" id="shortEdit">
                         <h2 class="title">{{ 'homepage.short_edit.title'|trans|u.upper }}</h2>
                         <div>
-                            <img src="{{ latestShortVersion|default ? asset('images/thumbnails/' ~ latestShortVersion.path) : 'https://place-hold.it/400x250' }}" alt="">
-                            <div class="lds-ripple infiniteZap" data-type="short" data-latestzapid="{{ latestZap.id }}"><div></div><div></div></div>
+                            <img src="{{ latestShortVersion|default ? asset('images/zaps/' ~ latestShortVersion.path) : 'https://place-hold.it/400x250' }}" alt="">
+                            <div class="lds-ripple infiniteData"
+                                 data-imagepath="{{ directory_zaps }}"
+                                 data-url="{{ path('app_zap_infinite', {'zapIdFrom': latestZap.id, 'type': 'short'}) }}"><div></div><div></div></div>
                         </div>
                     </div>
                 </div>
@@ -84,12 +91,17 @@
                 <div id="images">
                     {% if latestImages|default %}
                         {% for latestImage in latestImages %}
-                            <img src="{{ asset('images/uploads/' ~ latestImage.path) }}" alt="{{ latestImage.title }}">
+                            <img src="{{ asset('images/images/' ~ latestImage.image) }}"
+                                 data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}"
+                                 class="fakeHref"
+                                 alt="{{ latestImage.title }}">
                         {% endfor %}
                     {% else %}
                         <img src="https://place-hold.it/400x600" alt="Default image">
                     {% endif %}
-                    <div class="lds-ripple infiniteImage" data-latestimageid="{{ latestImage.id|default }}"><div></div><div></div></div>
+                    <div class="lds-ripple infiniteData"
+                         data-imagepath="{{ directory_images }}"
+                         data-url="{{ path('app_image_infinite', {'imageIdFrom': (latestImages|last).id}) }}"><div></div><div></div></div>
                 </div>
             </div>
         </div>

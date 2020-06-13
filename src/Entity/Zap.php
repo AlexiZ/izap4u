@@ -40,7 +40,7 @@ class Zap
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $thumbnail;
+    private $image;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -71,7 +71,7 @@ class Zap
             $this->setTitle($data['title'] ?? null);
             $this->setSubtitle($data['subtitle']);
             $this->setShortDescription($data['short_description']);
-            $this->setThumbnail($data['thumbnail']);
+            $this->setImage($data['image']);
             $this->setType($data['type']);
             $this->setDuration($data['duration']);
             $this->setLikes((int) $data['likes']);
@@ -134,14 +134,14 @@ class Zap
         return $this;
     }
 
-    public function getThumbnail(): ?string
+    public function getImage(): ?string
     {
-        return $this->thumbnail;
+        return $this->image;
     }
 
-    public function setThumbnail(string $thumbnail): self
+    public function setImage(string $image): self
     {
-        $this->thumbnail = $thumbnail;
+        $this->image = $image;
 
         return $this;
     }

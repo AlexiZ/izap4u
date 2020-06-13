@@ -2,7 +2,8 @@
 node_modules
 .sass-cache
 public/adminer.php
-public/images/uploads
+public/images/images
+public/images/zaps
 public/uploads
 
 ###> symfony/framework-bundle ###

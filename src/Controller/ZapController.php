@@ -81,14 +81,14 @@ class ZapController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $csvFile->move(
-                        $this->getParameter('csv_directory'),
+                        $this->getParameter('csv_uploads'),
                         $newFilename
                     );
                 } catch (FileException $e) {}
 
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
-                $csv = Reader::createFromPath($this->getParameter('csv_directory') . '/' . $newFilename, 'r');
+                $csv = Reader::createFromPath($this->getParameter('csv_uploads') . '/' . $newFilename, 'r');
                 $csv->setDelimiter(';');
                 $csv->setHeaderOffset(0);
                 $stmt = (new Statement());
@@ -107,7 +107,7 @@ class ZapController extends AbstractController
                     if ($record['thumbnail']) {
                         $thumbnail = $slugger->slug($record['title']) . '.jpg';
                         try {
-                            file_put_contents($this->getParameter('thumbnail_directory') . '/' . $thumbnail, fopen($record['thumbnail'], 'r'));
+                            file_put_contents($this->getParameter('zaps_thumbnails') . '/' . $thumbnail, fopen($record['thumbnail'], 'r'));
                         } catch (\Exception $e) {
                             continue;
                         }
@@ -124,7 +124,7 @@ class ZapController extends AbstractController
                 }
                 $this->getDoctrine()->getManager()->flush();
 
-                unlink($this->getParameter('csv_directory') . '/' . $newFilename);
+                unlink($this->getParameter('csv_uploads') . '/' . $newFilename);
             }
         }
 

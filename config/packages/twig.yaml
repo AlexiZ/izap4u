@@ -1,2 +1,5 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
+    globals:
+        directory_images: '/images/images/'
+        directory_zaps: '/images/zaps/'

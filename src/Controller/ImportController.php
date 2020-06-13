@@ -42,15 +42,18 @@ class ImportController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entity = '';
+            $directory = '';
             switch ($type) {
                 case 'zap':
                     $entity = Zap::class;
+                    $directory = $this->getParameter('zaps_thumbnails');
                     break;
                 case 'image':
                     $entity = Image::class;
+                    $directory = $this->getParameter('images_directory');
                     break;
             }
-            $import->import($form->get('file')->getData(), $this->getParameter('images_directory'), $entity);
+            $import->import($form->get('file')->getData(), $directory, $entity);
         }
 
         return $this->render('import/index.html.twig', [

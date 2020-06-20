@@ -31,3 +31,21 @@ zap:
   type:
     short: Version courte
     long: Version longue
+
+registration:
+  form:
+    submit: Inscription
+
+user:
+  form:
+    username:
+      label: Nom d'utilisateur
+      placeholder: John Smith
+    email:
+      label: Email
+      placeholder: email@me.com
+    password:
+      first:
+        label: Mot de passe
+      second:
+        label: Confirmation du mot de passe

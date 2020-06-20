@@ -24,6 +24,7 @@ $link-hover: $mainWhite;
 
 body {
   height: 100%;
+  min-height: 100vh;
   background-color: $lightBlack;
 
   .navbar {
@@ -57,7 +58,7 @@ body {
 
     #nav-content {
       z-index: 11;
-      margin-top: 70px;
+      margin-top: 81px;
       padding: 20px;
       width: 90%;
       max-width: 300px;
@@ -240,6 +241,16 @@ body {
         .column {
           padding-left: 0;
           padding-right: 0;
+        }
+      }
+
+      form[name="user"] {
+        .label {
+          color: white;
+          text-align: left;
+        }
+        .icon {
+          //color: black !important;
         }
       }
     }

@@ -6992,6 +6992,7 @@ label.panel-block {
 
 body {
   height: 100%;
+  min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.9); }
   body .navbar {
     background-color: black;
@@ -7011,7 +7012,7 @@ body {
       transform: none; }
     body .navbar #nav-content {
       z-index: 11;
-      margin-top: 70px;
+      margin-top: 81px;
       padding: 20px;
       width: 90%;
       max-width: 300px;
@@ -7137,5 +7138,8 @@ body {
     body .section .container #versions .column {
       padding-left: 0;
       padding-right: 0; }
+  body .section .container form[name="user"] .label {
+    color: white;
+    text-align: left; }
 
 /*# sourceMappingURL=styles.css.map */

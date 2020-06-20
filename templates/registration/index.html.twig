@@ -1,43 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-10 ml-md-auto">
-                <div class="card bg-light mb-3 mt-5" style="width: 800px">
-                    <div class="card-body">
-                        <div class="card-header mb-3">Registration Form</div>
-                        {{ form_start(form) }}
-                            <div class="form_group">
-                                <div class="col-md-12 mb-3">
-                                    {{ form_row(form.username, {'attr': {'class': 'form-control'}}) }}
-                                </div>
-                            </div>
-                            <div class="form_group">
-                                <div class="col-md-12 mb-3">
-                                    {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
-                                </div>
-                            </div>
-                            <div class="form_group">
-                                <div class="col-md-12 mb-3">
-                                    {{ form_row(form.password.first, {'attr': {'class': 'form-control'}}) }}
-                                </div>
-                            </div>
-                            <div class="form_group">
-                                <div class="col-md-12 mb-3">
-                                    {{ form_row(form.password.second, {'attr': {'class': 'form-control'}}) }}
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-md-8 col-md-offset-4" style="margin-top:5px;">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="fa fa-btn fa-user"></i> Register
-                                    </button>
-                                </div>
-                            </div>
-                        {{ form_end(form) }}
+    <div class="container has-text-centered">
+        <div class="columns is-centered">
+            <div class="column is-one-third">
+                {{ form_start(form) }}
+                    <div class="field">
+                        <label class="label">{{ 'user.form.username.label'|trans }}</label>
+                        <div class="control has-icons-left">
+                            {{ form_widget(form.username, {'attr': {'class': 'input', 'placeholder': 'user.form.username.placeholder'|trans}}) }}
+                            <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                        </div>
+                        {% if (form.username.vars.errors|length > 0) %}
+                            <p class="help is-danger">{{ form.username.vars.errors }}</p>
+                        {% endif %}
                     </div>
-                </div>
+
+                    <div class="field">
+                        <label class="label">{{ 'user.form.email.label'|trans }}</label>
+                        <div class="control has-icons-left has-icons-right">
+                            {{ form_widget(form.email, {'attr': {'class': 'input', 'placeholder': 'user.form.email.placeholder'|trans}}) }}
+                            <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        {% if (form.email.vars.errors|length > 0) %}
+                            <p class="help is-danger">{{ form.email.vars.errors }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">{{ 'user.form.password.first.label'|trans }}</label>
+                        <div class="control has-icons-left has-icons-right">
+                            {{ form_widget(form.password.first, {'attr': {'class': 'input'}}) }}
+                            <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                        </div>
+                        {% if (form.password.vars.errors|length > 0) %}
+                            <p class="help is-danger">{{ form.password.vars.errors }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label class="label">{{ 'user.form.password.second.label'|trans }}</label>
+                        <div class="control has-icons-left has-icons-right">
+                            {{ form_widget(form.password.second, {'attr': {'class': 'input'}}) }}
+                            <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
+                        </div>
+                        {% if (form.password.vars.errors|length > 0) %}
+                            <p class="help is-danger">{{ form.password.vars.errors }}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="buttons is-centered">
+                        <button class="button is-info">{{ 'registration.form.submit'|trans }}</button>
+                    </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>

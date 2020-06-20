@@ -52,6 +52,16 @@ class User implements UserInterface
      */
     private $status;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $firstname;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lastname;
+
     public static $statusValues = [
         self::STATUS_ENABLED => 'user.status.enabled',
         self::STATUS_DISABLED => 'user.status.disabled',
@@ -66,9 +76,9 @@ class User implements UserInterface
     public function __toString()
     {
         return implode(', ', [
-            $this->getUsername(),
-            $this->getEmail(),
-            $this->getRegistrationDate()->format('d/m/Y H:i:s'),
+            $this->getFirstname(),
+            '"' . $this->getUsername() . '"',
+            $this->getLastname(),
         ]);
     }
 
@@ -162,6 +172,30 @@ class User implements UserInterface
         if (in_array($status, self::$statusValues)) {
             $this->status = $status;
         }
+
+        return $this;
+    }
+
+    public function getFirstname(): ?string
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname(?string $firstname): self
+    {
+        $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getLastname(): ?string
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname(?string $lastname): self
+    {
+        $this->lastname = $lastname;
 
         return $this;
     }

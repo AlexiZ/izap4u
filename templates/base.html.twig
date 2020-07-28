@@ -50,8 +50,8 @@
                 {% endif %}
 
                 <div class="navbar-item countryFlags">
-                    <a href="{{ path(app.request.attributes.get('_route'), {'_locale': 'fr'}) }}" class="flag-icon flag-icon-fr"></a>
-                    <a href="{{ path(app.request.attributes.get('_route'), {'_locale': 'en'}) }}" class="flag-icon flag-icon-gb"></a>
+                    <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'fr'})) }}" class="flag-icon flag-icon-fr"></a>
+                    <a href="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge({'_locale': 'en'})) }}" class="flag-icon flag-icon-gb"></a>
                 </div>
             </div>
         </nav>

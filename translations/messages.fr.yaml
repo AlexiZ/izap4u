@@ -17,7 +17,7 @@ homepage:
     title: Share
   full_version:
     title: Full version
-  short_edit:
+  society:
     title: Society
   images:
     title: Images
@@ -29,7 +29,7 @@ zap:
     archived: Archivé
     deleted: Supprimé
   type:
-    short: Version courte
+    society: Société
     long: Version longue
 
 registration:

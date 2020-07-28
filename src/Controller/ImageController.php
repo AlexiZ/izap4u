@@ -10,15 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class ImageController extends AbstractController
 {
     /**
-     * @Route("/zap/show/{zapId}", methods={"GET","HEAD"})
+     * @Route("/image/show/{imageId}", methods={"GET","HEAD"})
      *
-     * @param int $zapId
+     * @param int $imageId
      * @return Response
      */
-    public function show(int $zapId)
+    public function show(int $imageId)
     {
-        return $this->render('zap/show.html.twig', [
-            'zap' => $this->getDoctrine()->getRepository('App:Zap')->find($zapId),
+        return $this->render('image/show.html.twig', [
+            'image' => $this->getDoctrine()->getRepository('App:Image')->find($imageId),
         ]);
     }
 

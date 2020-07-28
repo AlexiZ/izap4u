@@ -13,7 +13,7 @@ class Zap
     use PublishableTrait, ViewableTrait;
 
     const TYPE_LONG = 'long';
-    const TYPE_SHORT = 'short';
+    const TYPE_SOCIETY = 'society';
 
     /**
      * @ORM\Id()
@@ -58,7 +58,7 @@ class Zap
     private $link;
 
     public static $typeValues = [
-        self::TYPE_SHORT => 'zap.type.short',
+        self::TYPE_SOCIETY => 'zap.type.society',
         self::TYPE_LONG => 'zap.type.long',
     ];
 

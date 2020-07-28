@@ -69,22 +69,29 @@
                     <div class="column is-half has-text-centered" id="FullVersion">
                         <h2 class="title">{{ 'homepage.full_version.title'|trans|u.upper }}</h2>
                         <div>
-                            <img src="{{ latestZap|default ? asset('images/zaps/' ~ latestZap.image) : 'https://place-hold.it/400x250' }}"
-                                 data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}"
-                                 class="fakeHref"
-                                 alt="{{ latestZap.title }}">
+                            <a href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}" title="{{ latestZap|default }}">
+                                <img src="{{ latestZap|default ? asset('images/zaps/' ~ latestZap.image) : 'https://place-hold.it/400x250' }}" alt="{{ latestZap|default }}">
+                            </a>
                             <div class="lds-ripple infiniteData"
                                  data-imagepath="{{ directory_zaps }}"
-                                 data-url="{{ path('app_zap_infinite', {'zapIdFrom': latestZap.id, 'type': 'long'}) }}"><div></div><div></div></div>
+                                 data-targeturl="{{ path('app_zap_show', {'zapId': 0}) }}"
+                                 data-xhrurl="{{ path('app_zap_infinite', {'zapIdFrom': latestZap.id|default, 'type': 'long'}) }}">
+                                <div></div><div></div>
+                            </div>
                         </div>
                     </div>
                     <div class="column is-half has-text-centered" id="shortEdit">
-                        <h2 class="title">{{ 'homepage.short_edit.title'|trans|u.upper }}</h2>
+                        <h2 class="title">{{ 'homepage.society.title'|trans|u.upper }}</h2>
                         <div>
-                            <img src="{{ latestShortVersion|default ? asset('images/zaps/' ~ latestShortVersion.path) : 'https://place-hold.it/400x250' }}" alt="">
+                            <a href="{{ latestSociety|default ? path('app_zap_show', {'zapId': latestSociety.id}) }}" title="{{ latestSociety|default }}">
+                                <img src="{{ latestSociety|default ? asset('images/zaps/' ~ latestSociety.path) : 'https://place-hold.it/400x250' }}" alt="{{ latestSociety|default }}">
+                            </a>
                             <div class="lds-ripple infiniteData"
                                  data-imagepath="{{ directory_zaps }}"
-                                 data-url="{{ path('app_zap_infinite', {'zapIdFrom': latestZap.id, 'type': 'short'}) }}"><div></div><div></div></div>
+                                 data-targeturl="{{ path('app_zap_show', {'zapId': 0}) }}"
+                                 data-xhrurl="{{ path('app_zap_infinite', {'zapIdFrom': latestSociety.id|default, 'type': 'short'}) }}">
+                                <div></div><div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -95,17 +102,19 @@
                 <div id="images">
                     {% if latestImages|default %}
                         {% for latestImage in latestImages %}
-                            <img src="{{ asset('images/images/' ~ latestImage.image) }}"
-                                 data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}"
-                                 class="fakeHref"
-                                 alt="{{ latestImage.title }}">
+                            <a href="{{ latestZap|default ? path('app_image_show', {'imageId': latestImage.id}) }}" title="{{ latestImage|default }}">
+                                <img src="{{ asset('images/images/' ~ latestImage.image) }}" alt="{{ latestImage|default }}">
+                            </a>
                         {% endfor %}
                     {% else %}
                         <img src="https://place-hold.it/400x600" alt="Default image">
                     {% endif %}
                     <div class="lds-ripple infiniteData"
                          data-imagepath="{{ directory_images }}"
-                         data-url="{{ path('app_image_infinite', {'imageIdFrom': (latestImages|last).id}) }}"><div></div><div></div></div>
+                         data-targeturl="{{ path('app_image_show', {'imageId': 0}) }}"
+                         data-xhrurl="{{ path('app_image_infinite', {'imageIdFrom': (latestImages|last).id|default}) }}">
+                        <div></div><div></div>
+                    </div>
                 </div>
             </div>
         </div>

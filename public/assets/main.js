@@ -18,33 +18,45 @@
             let observer = new IntersectionObserver(entries => {
                 if (true === entries[0].isIntersecting) {
                     let xhr = new XMLHttpRequest(),
-                        nextData = infiniteData.previousElementSibling.cloneNode()
-
+                        targetUrl = infiniteData.dataset.targeturl,
+                        xhrUrl = infiniteData.dataset.xhrurl
+                    console.log(infiniteData.dataset.xhrurl)
                     xhr.responseType = 'json'
                     xhr.onreadystatechange = () => {
                         if (4 === xhr.readyState) {
-                            if (!xhr.response[0]) {
+                            // No results - remove infinite loader
+                            if (0 === xhr.response.length) {
                                 infiniteData.remove()
                                 return
                             }
 
-                            nextData.src = infiniteData.dataset.imagepath + xhr.response[0]['image']
-                            nextData.alt = xhr.response[0]['title']
+                            xhr.response.forEach(element => {
+                                // Build target url
+                                targetUrl = targetUrl.replace('0', element.id)
 
-                            let urlParts = nextData.dataset.href.split('/')
-                            urlParts[urlParts.length - 1] = xhr.response[0]['id']
-                            nextData.dataset.href = urlParts.join('/')
+                                // Create link to loaded element
+                                let a = document.createElement('a')
+                                a.href = targetUrl
 
-                            applyFakeHref(nextData);
+                                // Create image to show element
+                                let img = document.createElement('img')
+                                img.src = infiniteData.dataset.imagepath + element.image
 
-                            infiniteData.parentElement.insertBefore(nextData, infiniteData);
+                                // Add element image under element link
+                                a.appendChild(img)
 
-                            urlParts = infiniteData.dataset.url.split('/')
-                            urlParts[urlParts.length - 1] = xhr.response[0]['id']
-                            infiniteData.dataset.url = urlParts.join('/')
+                                // Insert element link to DOM
+                                infiniteData.parentElement.insertBefore(a, infiniteData)
+
+                                // Update infinite element url for next call
+                                let xhrUrlParts = xhrUrl.split('/')
+                                xhrUrlParts[xhrUrlParts.length - 1] = element.id
+                                infiniteData.dataset.xhrurl = xhrUrlParts.join('/')
+                                console.log(xhrUrlParts)
+                            })
                         }
                     }
-                    xhr.open("GET", infiniteData.dataset.url, true)
+                    xhr.open("GET", infiniteData.dataset.xhrurl, true)
                     xhr.send()
                 }
             }, {
@@ -53,4 +65,4 @@
             observer.observe(infiniteData)
         })
     }
-})();
+})()

@@ -7065,6 +7065,8 @@ body {
     font-style: italic;
     font-weight: 800;
     color: rgba(0, 0, 0, 0.9); }
+    body .section .container .title a {
+      color: rgba(0, 0, 0, 0.9); }
   body .section .container #latestZap {
     background-position: center;
     background-size: contain;

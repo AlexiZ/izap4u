@@ -17,7 +17,11 @@
             <div class="column is-two-thirds">
                 <div class="columns fakeHref" id="latestZap" data-href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}">
                     <div class="column is-two-fifths">
-                        <h1 class="title">{{ latestZap.title|default('ZAP #000')|u.upper }}</h1>
+                        <h1 class="title">
+                            <a href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}" title="{{ latestZap }}">
+                                {{ latestZap.title|default('ZAP #000')|u.upper }}
+                            </a>
+                        </h1>
                         <h2 class="subtitle">{{ latestZap.subtitle|default('lipsum.short'|trans)|u.upper }}</h2>
                         <p class="shortDescription">{{ latestZap.shortDescription|default('lipsum.long'|trans)|u.truncate(400, '...') }}</p>
                         <p class="details"><span>{{ 'homepage.latest_zap.details'|trans({'%views%': latestZap.views|default(0)}) }}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>{{ latestZap.publishedAt|default('now')|date('d.m.Y') }}</span></p>

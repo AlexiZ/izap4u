@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>iZap4u – {% block title %}Voyage à la vitesse de l'esprit{% endblock %}</title>
+        <title>iZap4u – {% block title %}{{ 'head.title'|trans }}{% endblock %}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
         <link rel="stylesheet" href="{{ asset('styles.min.css') }}">
@@ -20,33 +20,33 @@
             <div id="nav-content" tabindex="0">
                 <input type="text" class="input" name="search" placeholder="Rechercher">
                 <ul>
-                    <li><a href="{{ path('app_homepage_index') }}">Homepage</a></li>
-                    <li><a href="{{ path('app_zap_list') }}">LE ZAP</a></li>
-                    <li><a href="{{ path('app_image_list') }}">LES IMAGES</a></li>
-                    <li><a href="{{ path('app_default_leftovers') }}">LES RESTES DU MONDE</a></li>
-                    <li><a href="{{ path('app_default_goodvibes') }}">DU BON SON</a></li>
-                    <li><a href="{{ path('app_default_homemade') }}">LES VID&Eacute;OS MAISON</a></li>
-                    <li><a href="{{ path('app_default_documentary') }}">LES DOCUMENTAIRES &Agrave; VOIR (OU PAS)</a></li>
-                    <li><a href="{{ path('app_import_upload') }}">SOUMETTRE UN LIEN VID&Eacute;O</a></li>
-                    <li><a href="{{ path('app_default_donate') }}">FAIRE UN DON</a></li>
-                    <li><a href="{{ path('profile') }}">ACC&Eacute;DER &Agrave; MON COMPTE</a></li>
+                    <li><a href="{{ path('app_homepage_index') }}">{{ 'navbar.menu.homepage'|trans }}</a></li>
+                    <li><a href="{{ path('app_zap_list') }}">{{ 'navbar.menu.zap'|trans }}</a></li>
+                    <li><a href="{{ path('app_image_list') }}">{{ 'navbar.menu.images'|trans }}</a></li>
+                    <li><a href="{{ path('app_default_leftovers') }}">{{ 'navbar.menu.leftovers'|trans }}</a></li>
+                    <li><a href="{{ path('app_default_goodvibes') }}">{{ 'navbar.menu.goodvibes'|trans }}</a></li>
+                    <li><a href="{{ path('app_default_homemade') }}">{{ 'navbar.menu.homemade'|trans }}</a></li>
+                    <li><a href="{{ path('app_default_documentary') }}">{{ 'navbar.menu.documentaries'|trans }}</a></li>
+                    <li><a href="{{ path('app_import_upload') }}">{{ 'navbar.menu.submit'|trans }}</a></li>
+                    <li><a href="{{ path('app_default_donate') }}">{{ 'navbar.menu.donate'|trans }}</a></li>
+                    <li><a href="{{ path('profile') }}">{{ 'navbar.menu.account'|trans }}</a></li>
                 </ul>
             </div>
             <div id="nav-overlay"></div>
 
             <div class="navbar-menu is-block bannerContainer">
                 <a href="{{ path('app_homepage_index') }}" class="navbar-item has-text-centered is-block">
-                    <img src="{{ asset('images/banner.png') }}" alt="Bannière iZap4u">
+                    <img src="{{ asset('images/banner.png') }}" alt="Logo iZap4u">
                 </a>
             </div>
 
             <div class="navbar-end customerLinks">
                 {% if not app.user %}
-                    <a href="{{ path('app_login') }}" class="navbar-item login">S'identifier</a>
-                    <a href="{{ path('registration') }}" class="navbar-item signup">S'inscrire</a>
+                    <a href="{{ path('app_login') }}" class="navbar-item login">{{ 'navbar.account.signin'|trans }}</a>
+                    <a href="{{ path('registration') }}" class="navbar-item signup">{{ 'navbar.account.signup'|trans }}</a>
                 {% else %}
                     <a href="{{ path('profile') }}" class="navbar-item">{{ app.user.username }}</a>
-                    <a href="{{ path('app_logout') }}" class="navbar-item">Se déconnecter</a>
+                    <a href="{{ path('app_logout') }}" class="navbar-item">{{ 'navbar.account.logout'|trans }}</a>
                 {% endif %}
 
                 <div class="navbar-item countryFlags">

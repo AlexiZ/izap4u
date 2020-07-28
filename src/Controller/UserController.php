@@ -16,7 +16,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/list", name="user_index", methods={"GET"})
+     * @Route({
+     *     "fr": "/utilisateurs",
+     *     "en": "/users",
+     * }, name="user_index", methods={"GET"})
      * @param UserRepository $userRepository
      * @return Response
      */
@@ -28,7 +31,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="user_new", methods={"GET","POST"})
+     * @Route({
+     *     "fr": "/utilisateur/nouveau",
+     *     "en": "/user/new",
+     * }, name="user_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
      */
@@ -53,7 +59,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_show", methods={"GET"})
+     * @Route({
+     *     "fr": "/utilisateur/{id}",
+     *     "en": "/user/{id}",
+     * }, name="user_show", methods={"GET"})
      * @param User $user
      * @return Response
      */
@@ -65,7 +74,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_edit", methods={"GET","POST"})
+     * @Route({
+     *     "fr": "/utilisateur/{id}/modifier",
+     *     "en": "/user/{id}/edit",
+     * }, name="user_edit", methods={"GET","POST"})
      * @param Request $request
      * @param User $user
      * @return Response
@@ -88,7 +100,10 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     * @Route({
+     *     "fr": "/utilisateur/{id}",
+     *     "en": "/user/{id}",
+     * }, name="user_delete", methods={"DELETE"})
      * @param Request $request
      * @param User $user
      * @return Response

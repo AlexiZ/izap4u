@@ -60,4 +60,15 @@ class ImportController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route({
+     *     "fr": "/soumettre-un-lien",
+     *     "en": "/submit-a-link",
+     * })
+     */
+    public function upload()
+    {
+        return $this->render('import/submit.html.twig');
+    }
 }

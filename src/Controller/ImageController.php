@@ -10,7 +10,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class ImageController extends AbstractController
 {
     /**
-     * @Route("/image/show/{imageId}", methods={"GET","HEAD"})
+     * @Route({
+     *     "fr": "/les-images",
+     *     "en": "/the-images",
+     * }, methods={"GET", "HEAD"})
+     *
+     * @param int $limit
+     * @return Response
+     */
+    public function list(int $limit = 10)
+    {
+        return $this->render('image/list.html.twig', [
+            'images' => $this->getDoctrine()->getRepository('App:Image')->findBy([], null, $limit),
+        ]);
+    }
+
+    /**
+     * @Route({
+     *     "fr": "/les-images/{imageId}",
+     *     "en": "/the-images/{imageId}",
+     * }, methods={"GET","HEAD"})
      *
      * @param int $imageId
      * @return Response
@@ -23,7 +42,10 @@ class ImageController extends AbstractController
     }
 
     /**
-     * @Route("/image/infinite/{imageIdFrom}", methods={"GET","HEAD"})
+     * @Route({
+     *     "fr": "/les-images/_/{imageIdFrom}",
+     *     "en": "/the-images/_/{imageIdFrom}",
+     * }, methods={"GET","HEAD"})
      *
      * @param int|null $imageIdFrom
      * @return JsonResponse

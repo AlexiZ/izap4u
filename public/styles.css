@@ -7054,6 +7054,10 @@ body {
       left: 0;
       z-index: 10;
       background-color: rgba(0, 0, 0, 0.5); }
+    body .navbar .navbar-end .countryFlags {
+      flex-direction: column; }
+      body .navbar .navbar-end .countryFlags a {
+        margin: 5px; }
   body .section .container .columns, body .section .container .column {
     margin-top: 0.5rem;
     margin-bottom: 0.75rem; }

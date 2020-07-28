@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>iZap4u – {% block title %}Voyage à la vitesse de l'esprit{% endblock %}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
         <link rel="stylesheet" href="{{ asset('styles.min.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
@@ -19,16 +20,16 @@
             <div id="nav-content" tabindex="0">
                 <input type="text" class="input" name="search" placeholder="Rechercher">
                 <ul>
-                    <li><a href="#0">Homepage</a></li>
-                    <li><a href="#0">LE ZAP</a></li>
-                    <li><a href="#0">LES IMAGES</a></li>
-                    <li><a href="#0">LES RESTES DU MONDE</a></li>
-                    <li><a href="#0">DU BON SON</a></li>
-                    <li><a href="#0">LES VID&Eacute;OS MAISON</a></li>
-                    <li><a href="#0">LES DOCUMENTAIRES &Agrave; VOIR (OU PAS)</a></li>
-                    <li><a href="#0">SOUMETTRE UN LIEN VID&Eacute;O</a></li>
-                    <li><a href="#0">FAIRE UN DON</a></li>
-                    <li><a href="#0">ACC&Eacute;DER &Agrave; MON COMPTE</a></li>
+                    <li><a href="{{ path('app_homepage_index') }}">Homepage</a></li>
+                    <li><a href="{{ path('app_zap_list') }}">LE ZAP</a></li>
+                    <li><a href="{{ path('app_image_list') }}">LES IMAGES</a></li>
+                    <li><a href="{{ path('app_default_leftovers') }}">LES RESTES DU MONDE</a></li>
+                    <li><a href="{{ path('app_default_goodvibes') }}">DU BON SON</a></li>
+                    <li><a href="{{ path('app_default_homemade') }}">LES VID&Eacute;OS MAISON</a></li>
+                    <li><a href="{{ path('app_default_documentary') }}">LES DOCUMENTAIRES &Agrave; VOIR (OU PAS)</a></li>
+                    <li><a href="{{ path('app_import_upload') }}">SOUMETTRE UN LIEN VID&Eacute;O</a></li>
+                    <li><a href="{{ path('app_default_donate') }}">FAIRE UN DON</a></li>
+                    <li><a href="{{ path('profile') }}">ACC&Eacute;DER &Agrave; MON COMPTE</a></li>
                 </ul>
             </div>
             <div id="nav-overlay"></div>
@@ -47,6 +48,11 @@
                     <a href="{{ path('profile') }}" class="navbar-item">{{ app.user.username }}</a>
                     <a href="{{ path('app_logout') }}" class="navbar-item">Se déconnecter</a>
                 {% endif %}
+
+                <div class="navbar-item countryFlags">
+                    <a href="{{ path(app.request.attributes.get('_route'), {'_locale': 'fr'}) }}" class="flag-icon flag-icon-fr"></a>
+                    <a href="{{ path(app.request.attributes.get('_route'), {'_locale': 'en'}) }}" class="flag-icon flag-icon-gb"></a>
+                </div>
             </div>
         </nav>
 

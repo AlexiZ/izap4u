@@ -23,7 +23,10 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/registration", name="registration")
+     * @Route({
+     *     "fr": "/creation-de-compte",
+     *     "en": "/registration",
+     * }, name="registration")
      * @param Request $request
      * @param LoginFormAuthenticator $authenticator
      * @param GuardAuthenticatorHandler $guardHandler

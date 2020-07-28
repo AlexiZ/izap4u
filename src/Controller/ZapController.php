@@ -10,7 +10,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class ZapController extends AbstractController
 {
     /**
-     * @Route("/zap/show/{zapId}", methods={"GET","HEAD"})
+     * @Route({
+     *     "fr": "/le-zap",
+     *     "en": "/the-zap",
+     * }, methods={"GET", "HEAD"})
+     *
+     * @param int $limit
+     * @return Response
+     */
+    public function list(int $limit = 10)
+    {
+        return $this->render('zap/list.html.twig', [
+            'zaps' => $this->getDoctrine()->getRepository('App:Zap')->findBy([], null, $limit),
+        ]);
+    }
+
+    /**
+     * @Route({
+     *     "fr": "/le-zap/{zapId}",
+     *     "en": "/the-zap/{zapId}",
+     * }, methods={"GET","HEAD"})
      *
      * @param int $zapId
      * @return Response
@@ -23,7 +42,10 @@ class ZapController extends AbstractController
     }
 
     /**
-     * @Route("/zap/infinite/{type}/{zapIdFrom}", methods={"GET","HEAD"})
+     * @Route({
+     *     "fr": "/le-zap/_/{type}/{zapIdFrom}",
+     *     "en": "/the-zap/_/{type}/{zapIdFrom}",
+     * }, methods={"GET","HEAD"})
      *
      * @param string $type
      * @param int|null $zapIdFrom

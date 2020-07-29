@@ -1,0 +1,8 @@
+<div class="column is-one-third">
+    <a href="{{ path('app_image_show', {'imageId': image.id}) }}">
+        <h2 class="title">
+            {{ image|u.upper }}
+        </h2>
+        <img src="{{ asset('images/images/' ~ image.image) }}" alt="{{ image }}">
+    </a>
+</div>

@@ -54,4 +54,24 @@ class ImageRepository extends ServiceEntityRepository
             ->getArrayResult()
         ;
     }
+
+    /**
+     * Images starting from a certain id and descending by publication date
+     *
+     * @param int $limit
+     * @param int $offset
+     * @return array|null
+     */
+    public function getDescending(int $limit = 3, int $offset = 0): ?array
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.status = :status')
+            ->setParameter('status', PublishableTrait::$STATUS_PUBLISHED)
+            ->orderBy('i.publishedAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

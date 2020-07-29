@@ -43,30 +43,6 @@ class ZapRepository extends ServiceEntityRepository
     }
 
     /**
-     * Latest zap by publication date
-     *
-     * @param string $type
-     * @param int $limit
-     * @param int $zapIdFrom
-     * @return array|null
-     */
-    public function getDescending(string $type = 'long', int $limit = 3, int $zapIdFrom = 0): ?array
-    {
-        return $this->createQueryBuilder('z')
-            ->where('z.status = :status')
-            ->setParameter('status', PublishableTrait::$STATUS_PUBLISHED)
-            ->andWhere('z.type = :type')
-            ->setParameter('type', $type)
-            ->andWhere('z.id < :zapIdFrom')
-            ->setParameter('zapIdFrom', $zapIdFrom)
-            ->orderBy('z.publishedAt', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    /**
      * @param string $type
      * @param int|null $zapIdFrom
      * @return array|null
@@ -90,6 +66,29 @@ class ZapRepository extends ServiceEntityRepository
         return $qb
             ->getQuery()
             ->getArrayResult()
+        ;
+    }
+
+    /**
+     * Zaps starting from a certain id and descending by publication date
+     *
+     * @param string $type
+     * @param int $limit
+     * @param int $offset
+     * @return array|null
+     */
+    public function getDescending(string $type = 'long', int $limit = 3, int $offset = 0): ?array
+    {
+        return $this->createQueryBuilder('z')
+            ->where('z.status = :status')
+            ->setParameter('status', PublishableTrait::$STATUS_PUBLISHED)
+            ->andWhere('z.type = :type')
+            ->setParameter('type', $type)
+            ->orderBy('z.publishedAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
         ;
     }
 }

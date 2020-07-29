@@ -1,7 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for image in images %}
-        {{ image }}
-    {% endfor %}
+    <div class="container">
+        <h1 class="title">{{ 'image.list.title'|trans }}</h1>
+        <div class="columns is-multiline zapColumns">
+            {% for image in images %}
+                {% include 'image/_image.html.twig' with {'image': image} %}
+            {% endfor %}
+            <div class="lds-ripple"
+                 data-count="{{ images|length }}"
+                 data-xhrurl="{{ path('app_image_list', {'offset': images|length, 'limit': 3}) }}">
+                <div></div><div></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        (() => {
+            let loader = document.querySelector('.lds-ripple')
+            if (loader) {
+                let observer = new IntersectionObserver(entries => {
+                    if (entries[0].isIntersecting) {
+                        let xhr = new XMLHttpRequest()
+
+                        xhr.onreadystatechange = () => {
+                            if (4 === xhr.readyState) {
+                                // No results - remove infinite loader
+                                if (0 === xhr.response.length) {
+                                    loader.remove()
+                                    return
+                                }
+
+                                loader.insertAdjacentHTML('beforebegin', xhr.responseText)
+
+                                loader.dataset.count =  loader.parentElement.querySelectorAll('.column a').length
+                                loader.dataset.xhrurl = loader.dataset.xhrurl.replace(/offset=\d+/, 'offset=' + loader.dataset.count)
+                            }
+                        }
+                        xhr.open("GET", loader.dataset.xhrurl, true)
+                        xhr.send()
+                    }
+                }, {
+                    threshold: [1]
+                })
+                observer.observe(loader)
+            }
+        })()
+    </script>
 {% endblock %}

@@ -8,7 +8,8 @@
                 {% include 'zap/_zap.html.twig' with {'zap': zap} %}
             {% endfor %}
             <div class="lds-ripple"
-                 data-xhrurl="{{ path('app_zap_list', {'zapIdFrom': (zaps|last).id|default, 'type': 'long', 'limit': 3}) }}">
+                 data-count="{{ zaps|length }}"
+                 data-xhrurl="{{ path('app_zap_list', {'offset': zaps|length, 'type': 'long', 'limit': 3}) }}">
                 <div></div><div></div>
             </div>
         </div>
@@ -35,9 +36,8 @@
 
                                 loader.insertAdjacentHTML('beforebegin', xhr.responseText)
 
-                                let nodesResponse = loader.parentElement.querySelectorAll('.column a'),
-                                    lastNodeReponse = nodesResponse[nodesResponse.length - 1]
-                                loader.dataset.xhrurl = loader.dataset.xhrurl.replace(/zapIdFrom=\d+/, 'zapIdFrom=' + lastNodeReponse.dataset.id)
+                                loader.dataset.count =  loader.parentElement.querySelectorAll('.column a').length
+                                loader.dataset.xhrurl = loader.dataset.xhrurl.replace(/offset=\d+/, 'offset=' + loader.dataset.count)
                             }
                         }
                         xhr.open("GET", loader.dataset.xhrurl, true)

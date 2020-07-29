@@ -16,16 +16,17 @@ class ZapController extends AbstractController
      *     "en": "/the-zap",
      * }, methods={"GET", "HEAD"})
      *
+     * @param Request $request
      * @return Response
      */
     public function list(Request $request)
     {
-        if ($request->get('zapIdFrom') > 0) {
+        if ($request->get('offset') > 0) {
             $html = '';
             $zaps = $this->getDoctrine()->getRepository('App:Zap')->getDescending(
                 $request->get('type') ?? 'long',
                 $request->get('limit'),
-                $request->get('zapIdFrom')
+                $request->get('offset')
             );
             foreach ($zaps as $zap) {
                 $html .= $this->renderView('zap/_zap.html.twig', ['zap' => $zap]);

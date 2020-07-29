@@ -42,17 +42,22 @@ homepage:
   images:
     title: Images
 
+status:
+  draft: Brouillon
+  published: Publié
+  archived: Archivé
+  deleted: Supprimé
+
 zap:
-  status:
-    draft: Brouillon
-    published: Publié
-    archived: Archivé
-    deleted: Supprimé
   type:
     society: Société
     long: Version longue
   list:
     title: LES ZAPS
+
+image:
+  list:
+    title: LES IMAGES
 
 registration:
   form:

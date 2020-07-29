@@ -48,10 +48,10 @@ trait PublishableTrait
     public function setStatus(string $status): self
     {
         $statusValues = [
-            self::$STATUS_DRAFT => 'zap.status.draft',
-            self::$STATUS_PUBLISHED => 'zap.status.published',
-            self::$STATUS_ARCHIVED => 'zap.status.archived',
-            self::$STATUS_DELETED => 'zap.status.deleted',
+            self::$STATUS_DRAFT => 'status.draft',
+            self::$STATUS_PUBLISHED => 'status.published',
+            self::$STATUS_ARCHIVED => 'status.archived',
+            self::$STATUS_DELETED => 'status.deleted',
         ];
 
         if (in_array($status, array_keys($statusValues))) {

@@ -21,7 +21,7 @@ return new class extends DefaultDeployer
             ->remoteComposerBinaryPath('php7.3-cli /kunden/homepages/39/d655277423/htdocs/izap4u/composer.phar')
             ->remotePhpBinaryPath('php7.3-cli')
             ->symfonyEnvironment('prod')
-            ->sharedFilesAndDirs(['.env', 'var/log', 'public/images/uploads', 'public/images/images', 'public/images/zaps', 'public/media'])
+            ->sharedFilesAndDirs(['.env', 'var/log', 'public/images/uploads', 'public/images/images', 'public/images/zaps'])
         ;
     }
 

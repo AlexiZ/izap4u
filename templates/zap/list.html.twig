@@ -5,9 +5,7 @@
         <h1 class="title">{{ 'zap.list.title'|trans }}</h1>
         <div class="columns is-multiline zapColumns">
             {% for zap in zaps %}
-                <div class="column is-one-third">
-                    {% include 'zap/_zap.html.twig' with {'zap': zap} %}
-                </div>
+                {% include 'zap/_zap.html.twig' with {'zap': zap} %}
             {% endfor %}
             <div class="lds-ripple"
                  data-xhrurl="{{ path('app_zap_list', {'zapIdFrom': (zaps|last).id|default, 'type': 'long', 'limit': 3}) }}">
@@ -35,13 +33,9 @@
                                     return
                                 }
 
-                                let column = document.createElement('div')
-                                column.classList.add('column', 'is-one-third')
-                                column.innerHTML = xhr.responseText
+                                loader.insertAdjacentHTML('beforebegin', xhr.responseText)
 
-                                loader.parentElement.insertBefore(column, loader)
-
-                                let nodesResponse = column.querySelectorAll('a'),
+                                let nodesResponse = loader.parentElement.querySelectorAll('.column a'),
                                     lastNodeReponse = nodesResponse[nodesResponse.length - 1]
                                 loader.dataset.xhrurl = loader.dataset.xhrurl.replace(/zapIdFrom=\d+/, 'zapIdFrom=' + lastNodeReponse.dataset.id)
                             }

@@ -51,6 +51,8 @@ zap:
   type:
     society: Société
     long: Version longue
+  list:
+    title: LES ZAPS
 
 registration:
   form:

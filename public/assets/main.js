@@ -16,11 +16,11 @@
     if (infiniteDatas) {
         infiniteDatas.forEach(infiniteData => {
             let observer = new IntersectionObserver(entries => {
-                if (true === entries[0].isIntersecting) {
+                if (entries[0].isIntersecting) {
                     let xhr = new XMLHttpRequest(),
                         targetUrl = infiniteData.dataset.targeturl,
                         xhrUrl = infiniteData.dataset.xhrurl
-                    console.log(infiniteData.dataset.xhrurl)
+
                     xhr.responseType = 'json'
                     xhr.onreadystatechange = () => {
                         if (4 === xhr.readyState) {
@@ -52,7 +52,6 @@
                                 let xhrUrlParts = xhrUrl.split('/')
                                 xhrUrlParts[xhrUrlParts.length - 1] = element.id
                                 infiniteData.dataset.xhrurl = xhrUrlParts.join('/')
-                                console.log(xhrUrlParts)
                             })
                         }
                     }

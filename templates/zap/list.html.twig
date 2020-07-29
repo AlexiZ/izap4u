@@ -1,7 +1,59 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for zap in zaps %}
-        {{ zap }}
-    {% endfor %}
+    <div class="container">
+        <h1 class="title">{{ 'zap.list.title'|trans }}</h1>
+        <div class="columns is-multiline zapColumns">
+            {% for zap in zaps %}
+                <div class="column is-one-third">
+                    {% include 'zap/_zap.html.twig' with {'zap': zap} %}
+                </div>
+            {% endfor %}
+            <div class="lds-ripple"
+                 data-xhrurl="{{ path('app_zap_list', {'zapIdFrom': (zaps|last).id|default, 'type': 'long', 'limit': 3}) }}">
+                <div></div><div></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        (() => {
+            let loader = document.querySelector('.lds-ripple')
+            if (loader) {
+                let observer = new IntersectionObserver(entries => {
+                    if (entries[0].isIntersecting) {
+                        let xhr = new XMLHttpRequest()
+
+                        xhr.onreadystatechange = () => {
+                            if (4 === xhr.readyState) {
+                                // No results - remove infinite loader
+                                if (0 === xhr.response.length) {
+                                    loader.remove()
+                                    return
+                                }
+
+                                let column = document.createElement('div')
+                                column.classList.add('column', 'is-one-third')
+                                column.innerHTML = xhr.responseText
+
+                                loader.parentElement.insertBefore(column, loader)
+
+                                let nodesResponse = column.querySelectorAll('a'),
+                                    lastNodeReponse = nodesResponse[nodesResponse.length - 1]
+                                loader.dataset.xhrurl = loader.dataset.xhrurl.replace(/zapIdFrom=\d+/, 'zapIdFrom=' + lastNodeReponse.dataset.id)
+                            }
+                        }
+                        xhr.open("GET", loader.dataset.xhrurl, true)
+                        xhr.send()
+                    }
+                }, {
+                    threshold: [1]
+                })
+                observer.observe(loader)
+            }
+        })()
+    </script>
 {% endblock %}

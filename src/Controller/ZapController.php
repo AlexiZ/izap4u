@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -15,13 +16,26 @@ class ZapController extends AbstractController
      *     "en": "/the-zap",
      * }, methods={"GET", "HEAD"})
      *
-     * @param int $limit
      * @return Response
      */
-    public function list(int $limit = 10)
+    public function list(Request $request)
     {
+        if ($request->get('zapIdFrom') > 0) {
+            $html = '';
+            $zaps = $this->getDoctrine()->getRepository('App:Zap')->getDescending(
+                $request->get('type') ?? 'long',
+                $request->get('limit'),
+                $request->get('zapIdFrom')
+            );
+            foreach ($zaps as $zap) {
+                $html .= $this->renderView('zap/_zap.html.twig', ['zap' => $zap]);
+            }
+
+            return new Response($html);
+        }
+
         return $this->render('zap/list.html.twig', [
-            'zaps' => $this->getDoctrine()->getRepository('App:Zap')->findBy([], null, $limit),
+            'zaps' => $this->getDoctrine()->getRepository('App:Zap')->findBy([], ['createdAt' => 'DESC'], $request->get('limit') ?? 9),
         ]);
     }
 

@@ -7063,9 +7063,10 @@ body {
     margin-bottom: 0.75rem; }
     body .section .container .columns .fakeHref, body .section .container .column .fakeHref {
       cursor: pointer; }
+  body .section .container h1 {
+    font-size: 3rem; }
   body .section .container .title {
     text-shadow: -1px -1px 0 #b3685d, -1px 0px 0 #b3685d, -1px 1px 0 #b3685d, 0px -1px 0 #b3685d, 0px 0px 0 #b3685d, 0px 1px 0 #b3685d, 1px -1px 0 #b3685d, 1px 0px 0 #b3685d, 1px 1px 0 #b3685d;
-    font-size: 3rem;
     font-style: italic;
     font-weight: 800;
     color: rgba(0, 0, 0, 0.9); }

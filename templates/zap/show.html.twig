@@ -1,5 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ zap }}
+    <div class="container">
+        <div class="columns is-vcentered has-text-centered">
+            <div class="column is-one-quarter">
+                {% if previousZap|default %}
+                    <a href="{{ path('app_zap_show', {'zapId': previousZap.id}) }}" title="{{ previousZap }}" id="previousZap">
+                        <i class="fas fa-2x fa-angle-double-left"></i>
+                    </a>
+                {% endif %}
+            </div>
+
+            <div class="column is-half">
+                {% if currentZap|default %}
+                    <h1 class="title">
+                        <a href="{{ path('app_zap_show', {'zapId': currentZap.id}) }}" title="{{ currentZap }}">
+                            {{ currentZap.title|u.upper }}
+                        </a>
+                    </h1>
+                    <iframe style="max-height: 60vh;width:100%;min-height:40vh;" src="https://www.youtube.com/embed/{{ currentZap.link }}"></iframe>
+                    <h2 class="subtitle">{{ currentZap.subtitle|u.upper }}</h2>
+                    <p class="shortDescription">{{ currentZap.shortDescription|u.truncate(400, '...') }}</p>
+                    <p class="details"><span>{{ 'homepage.latest_zap.details'|trans({'%views%': currentZap.views|default(0)}) }}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>{{ currentZap.publishedAt|date('d.m.Y') }}</span></p>
+                {% endif %}
+            </div>
+
+            <div class="column is-one-quarter">
+                {% if nextZap|default %}
+                    <a href="{{ path('app_zap_show', {'zapId': nextZap.id}) }}" title="{{ nextZap }}" id="nextZap">
+                        <i class="fas fa-2x fa-angle-double-right"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        (() => {
+            document.addEventListener("keydown", e => {
+                switch (e.code) {
+                    case 'ArrowLeft':
+                        document.getElementById('previousZap').click()
+                        break;
+                    case 'ArrowRight':
+                        document.getElementById('nextZap').click()
+                        break;
+                    default:
+                        break;
+                }
+            });
+        })()
+    </script>
 {% endblock %}

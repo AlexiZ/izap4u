@@ -74,17 +74,4 @@ class ImageRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-
-    public function getSurroundings(int $pivot)
-    {
-        $ids = [$pivot - 1, $pivot, $pivot + 1];
-        return $this->createQueryBuilder('i')
-            ->where('i.status = :status')
-            ->setParameter('status', PublishableTrait::$STATUS_PUBLISHED)
-            ->andWhere('i.id IN (:ids)')
-            ->setParameter('ids', $ids)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
 }

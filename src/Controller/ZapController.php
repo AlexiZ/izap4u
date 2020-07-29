@@ -52,7 +52,9 @@ class ZapController extends AbstractController
     public function show(int $zapId)
     {
         return $this->render('zap/show.html.twig', [
-            'zap' => $this->getDoctrine()->getRepository('App:Zap')->find($zapId),
+            'previousZap' => $this->getDoctrine()->getRepository('App:Zap')->find($zapId - 1),
+            'currentZap' => $this->getDoctrine()->getRepository('App:Zap')->find($zapId),
+            'nextZap' => $this->getDoctrine()->getRepository('App:Zap')->find($zapId + 1),
         ]);
     }
 

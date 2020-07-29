@@ -51,7 +51,9 @@ class ImageController extends AbstractController
     public function show(int $imageId)
     {
         return $this->render('image/show.html.twig', [
-            'image' => $this->getDoctrine()->getRepository('App:Image')->find($imageId),
+            'previousImage' => $this->getDoctrine()->getRepository('App:Image')->find($imageId - 1),
+            'currentImage' => $this->getDoctrine()->getRepository('App:Image')->find($imageId),
+            'nextImage' => $this->getDoctrine()->getRepository('App:Image')->find($imageId + 1),
         ]);
     }
 

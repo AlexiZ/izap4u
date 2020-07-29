@@ -1,5 +1,50 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ image }}
+    <div class="container">
+        <div class="columns is-vcentered has-text-centered">
+            <div class="column is-one-quarter">
+                {% if previousImage|default %}
+                    <a href="{{ path('app_image_show', {'imageId': previousImage.id}) }}" title="{{ previousImage }}" id="previousImage">
+                        <i class="fas fa-2x fa-angle-double-left"></i>
+                    </a>
+                {% endif %}
+            </div>
+
+            <div class="column is-half">
+                {% if currentImage|default %}
+                    <h1 class="title">{{ currentImage }}</h1>
+                    <img style="max-height: 60vh;" src="{{ asset('images/images/') ~ currentImage.image }}" alt="{{ currentImage }}">
+                {% endif %}
+            </div>
+
+            <div class="column is-one-quarter">
+                {% if nextImage|default %}
+                    <a href="{{ path('app_image_show', {'imageId': nextImage.id}) }}" title="{{ nextImage }}" id="nextImage">
+                        <i class="fas fa-2x fa-angle-double-right"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        (() => {
+            document.addEventListener("keydown", e => {
+                switch (e.code) {
+                    case 'ArrowLeft':
+                        document.getElementById('previousImage').click()
+                        break;
+                    case 'ArrowRight':
+                        document.getElementById('nextImage').click()
+                        break;
+                    default:
+                        break;
+                }
+            });
+        })()
+    </script>
 {% endblock %}

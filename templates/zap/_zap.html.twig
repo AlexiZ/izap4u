@@ -3,7 +3,7 @@
         <h2 class="title">
             {{ zap|u.upper }}
         </h2>
-        <img src="{{ asset('images/zaps/' ~ zap.image) }}" alt="{{ zap }}">
+        <img src="{{ asset('images/zaps/' ~ zap.image)|imagine_filter('zap_thumb') }}" alt="{{ zap }}">
         <p class="details">
             <span>{{ 'homepage.latest_zap.details'|trans({'%views%': zap.views|default(0)}) }}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>{{ zap.publishedAt|date('d.m.Y') }}</span>
         </p>

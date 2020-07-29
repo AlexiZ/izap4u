@@ -3,7 +3,7 @@
 {% block stylesheets %}
     <style>
         #latestZap {
-            background-image: url('{{ latestZap|default ? asset('images/zaps/' ~ latestZap.image) : 'https://place-hold.it/640x450' }}');
+            background-image: url('{{ latestZap|default ? asset(directory_zaps ~ latestZap.image) : 'https://place-hold.it/640x450' }}');
         }
         .progressionBar {
             width: {{ donationPercentage|default(30) }}%;
@@ -67,10 +67,14 @@
 
                 <div class="columns" id="versions">
                     <div class="column is-half has-text-centered" id="FullVersion">
-                        <h2 class="title">{{ 'homepage.full_version.title'|trans|u.upper }}</h2>
+                        <h2 class="title">
+                            <a href="{{ path('app_zap_list') }}">
+                                {{ 'homepage.full_version.title'|trans|u.upper }}
+                            </a>
+                        </h2>
                         <div>
                             <a href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}" title="{{ latestZap|default }}">
-                                <img src="{{ latestZap|default ? asset('images/zaps/' ~ latestZap.image) : 'https://place-hold.it/400x250' }}" alt="{{ latestZap|default }}">
+                                <img src="{{ latestZap|default ? asset(directory_zaps ~ latestZap.image) : 'https://place-hold.it/400x250' }}" alt="{{ latestZap|default }}">
                             </a>
                             <div class="lds-ripple infiniteData"
                                  data-imagepath="{{ directory_zaps }}"
@@ -84,7 +88,7 @@
                         <h2 class="title">{{ 'homepage.society.title'|trans|u.upper }}</h2>
                         <div>
                             <a href="{{ latestSociety|default ? path('app_zap_show', {'zapId': latestSociety.id}) }}" title="{{ latestSociety|default }}">
-                                <img src="{{ latestSociety|default ? asset('images/zaps/' ~ latestSociety.path) : 'https://place-hold.it/400x250' }}" alt="{{ latestSociety|default }}">
+                                <img src="{{ latestSociety|default ? asset(directory_zaps ~ latestSociety.path) : 'https://place-hold.it/400x250' }}" alt="{{ latestSociety|default }}">
                             </a>
                             <div class="lds-ripple infiniteData"
                                  data-imagepath="{{ directory_zaps }}"
@@ -98,12 +102,16 @@
             </div>
 
             <div class="column is-one-third has-text-centered">
-                <h2 class="title">{{ 'homepage.images.title'|trans|u.upper }}</h2>
+                <h2 class="title">
+                    <a href="{{ path('app_image_list') }}">
+                        {{ 'homepage.images.title'|trans|u.upper }}
+                    </a>
+                </h2>
                 <div id="images">
                     {% if latestImages|default %}
                         {% for latestImage in latestImages %}
                             <a href="{{ latestZap|default ? path('app_image_show', {'imageId': latestImage.id}) }}" title="{{ latestImage|default }}">
-                                <img src="{{ asset('images/images/' ~ latestImage.image) }}" alt="{{ latestImage|default }}">
+                                <img src="{{ asset(directory_images ~ latestImage.image) }}" alt="{{ latestImage|default }}">
                             </a>
                         {% endfor %}
                     {% else %}

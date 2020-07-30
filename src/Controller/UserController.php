@@ -11,14 +11,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/user")
+ * @Route({
+ *     "fr": "/admin/utilisateurs",
+ *     "en": "/admin/users",
+ * })
  */
 class UserController extends AbstractController
 {
     /**
      * @Route({
-     *     "fr": "/utilisateurs",
-     *     "en": "/users",
+     *     "fr": "/",
+     *     "en": "/",
      * }, name="user_index", methods={"GET"})
      * @param UserRepository $userRepository
      * @return Response
@@ -32,8 +35,8 @@ class UserController extends AbstractController
 
     /**
      * @Route({
-     *     "fr": "/utilisateur/nouveau",
-     *     "en": "/user/new",
+     *     "fr": "/nouveau",
+     *     "en": "/new",
      * }, name="user_new", methods={"GET","POST"})
      * @param Request $request
      * @return Response
@@ -60,8 +63,8 @@ class UserController extends AbstractController
 
     /**
      * @Route({
-     *     "fr": "/utilisateur/{id}",
-     *     "en": "/user/{id}",
+     *     "fr": "/{id}",
+     *     "en": "/{id}",
      * }, name="user_show", methods={"GET"})
      * @param User $user
      * @return Response
@@ -75,8 +78,8 @@ class UserController extends AbstractController
 
     /**
      * @Route({
-     *     "fr": "/utilisateur/{id}/modifier",
-     *     "en": "/user/{id}/edit",
+     *     "fr": "/{id}/modifier",
+     *     "en": "/{id}/edit",
      * }, name="user_edit", methods={"GET","POST"})
      * @param Request $request
      * @param User $user
@@ -101,8 +104,8 @@ class UserController extends AbstractController
 
     /**
      * @Route({
-     *     "fr": "/utilisateur/{id}",
-     *     "en": "/user/{id}",
+     *     "fr": "/{id}",
+     *     "en": "/{id}",
      * }, name="user_delete", methods={"DELETE"})
      * @param Request $request
      * @param User $user

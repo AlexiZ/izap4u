@@ -3,7 +3,8 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 files: {
-                    'public/styles.css': 'public/assets/main.scss'
+                    'public/styles.css': 'public/assets/main.scss',
+                    'public/admin.css': 'public/assets/admin/style.scss'
                 }
             }
         },
@@ -14,7 +15,8 @@ module.exports = function(grunt) {
             },
             target: {
                 files: {
-                    'public/styles.min.css': ['public/styles.css']
+                    'public/styles.min.css': ['public/styles.css'],
+                    'public/admin.min.css': ['public/admin.css']
                 }
             }
         },

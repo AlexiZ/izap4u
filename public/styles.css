@@ -7133,13 +7133,8 @@ body {
     margin-top: 0;
     margin-bottom: 0;
     padding-bottom: 0; }
-    body .section .container #share h2 {
-      float: left;
-      margin-right: 30px; }
     body .section .container #share .social {
-      width: 50px;
-      float: left;
-      margin-left: 10px; }
+      width: 50px; }
   body .section .container #versions {
     margin-top: 0; }
     body .section .container #versions .column {

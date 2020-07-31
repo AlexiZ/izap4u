@@ -1880,6 +1880,24 @@ header .form-inline {
     }
   }
 }
+.dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_paginate {
+  display: flex;
+  justify-content: flex-end;
+}
+.dataTables_length label {
+  display: flex;
+  align-items: center;
+  .custom-select {
+    width: 70px;
+    margin: auto 5px;
+  }
+}
+.dataTables_filter label {
+  display: flex;
+  input {
+    margin-left: 5px;
+  }
+}
 // Responsive Styles
 @media (max-width: 1368px) {
   .content {

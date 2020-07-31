@@ -65,6 +65,9 @@ registration:
     submit: Inscription
 
 user:
+  status:
+    enabled: Activé
+    disabled: Désactivé
   form:
     username:
       label: Nom d'utilisateur

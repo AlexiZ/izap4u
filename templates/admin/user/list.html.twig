@@ -1,0 +1,65 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block content %}
+    <div style="display:flex;flex-direction:row-reverse;margin-bottom:20px;">
+        <a href="{{ path('app_admin_user_new') }}" type="button" class="btn btn-outline-primary"><i class="fa fa-plus"></i>&nbsp; Créer un utilisateur</a>
+    </div>
+    <table id="datatableUsersList" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom d'utilisateur</th>
+                <th>Type d'accès</th>
+                <th>Email</th>
+                <th>Date d'inscription</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}<br><small>{{ user.firstname }} {{ user.lastname }}</small></td>
+                    <td>
+                        {% if 'ROLE_ADMIN' in user.roles|default %}
+                            Administrateur
+                        {% else %}
+                            Utilisateur
+                        {% endif %}
+                        {% if 'ROLE_USER' in user.roles|default %}
+                            <a href="{{ path('profile') }}?switch_user={{ user.username }}" title="Se connecter sur le site en tant que {{ user.username }}">
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        {% endif %}
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.registrationDate ? user.registrationDate|date('\\L\\e d/m/Y \\à H\\hi') : '' }}</td>
+                    <td>{{ ('user.status.' ~ user.status)|trans }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}" title="Modifier les informations"><i class="fa fa-2x fa-pencil"></i></a>
+                        <a href="{{ path('app_admin_user_delete', {'id': user.id}) }}" title="Supprimer l'utilisateur"><i class="fa fa-2x fa-times"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun utilisateur</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+
+    <script>
+        jQuery('#datatableUsersList').DataTable(datatableOptions);
+    </script>
+{% endblock %}

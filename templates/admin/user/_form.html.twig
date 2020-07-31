@@ -1,0 +1,37 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.email, 'Adresse mail', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-4">
+            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="col col-md-2">
+            {{ form_label(form.username, 'Nom d\'utilisateur', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-4">
+            {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.password.first, '', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-4">
+            {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="col col-md-2">
+            {{ form_label(form.password.second, '', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-4">
+            {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;">
+        <button type="button" class="btn btn-outline-success"><i class="fa fa-check"></i>&nbsp;{{ button_label|default('Enregistrer') }}</button>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,13 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modifier les informations de {{ user.username }}{% endblock %}
+
+{% block content %}
+    <div style="display:flex;justify-content:space-between;margin-bottom:20px;">
+        <a href="{{ path('app_admin_user_list') }}" type="button" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i>&nbsp;Retour à la liste des utilisateurs</a>
+        &nbsp;&nbsp;
+        {{ include('admin/user/_delete_form.html.twig') }}
+    </div>
+
+    {{ include('admin/user/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+{% endblock %}

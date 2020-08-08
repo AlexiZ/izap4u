@@ -105,7 +105,9 @@
                 {
                     'data': 'id',
                     'render': function (data, type, row, meta) {
-                        return '<a href="{{ path('app_admin_zap_edit', {'id': 9999}) }}" title="Modifier le zap"><i class="fa fa-2x fa-pencil"></i></a>'.replace('9999', data)
+                        let linkEdit = '<a href="{{ path('app_admin_zap_edit', {'id': 9999}) }}" title="Modifier le zap"><i class="fa fa-2x fa-pencil"></i></a>'.replace('9999', data),
+                            linkShow = '<a href="{{ path('app_zap_show', {'zapId': 9999}) }}" title="Voir sur le site" target="_blank"><i class="fa fa-2x fa-external-link"></i></a>'.replace('9999', data)
+                        return linkEdit + '&nbsp;' + linkShow
                     }
                 }
             ]

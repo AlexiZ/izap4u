@@ -38,12 +38,12 @@
 
                 <div id="main-menu" class="main-menu collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="#"> <i class="menu-icon fa fa-dashboard"></i>Tableau de bord </a>
+                        <li {% if 'app_admin_dashboard_index' == app.request.attributes.get('_route') %}class="active"{% endif %}>
+                            <a href="{{ path('app_admin_dashboard_index') }}"> <i class="menu-icon fa fa-dashboard"></i>Tableau de bord </a>
                         </li>
                         <h3 class="menu-title">Mes créations</h3><!-- /.menu-title -->
-                        <li>
-                            <a href="#"> <i class="menu-icon fa fa-video-camera"></i>Zaps </a>
+                        <li {% if 'app_admin_zap_list' == app.request.attributes.get('_route') %}class="active"{% endif %}>
+                            <a href="{{ path('app_admin_zap_list') }}"> <i class="menu-icon fa fa-video-camera"></i>Zaps </a>
                         </li>
                         <li>
                             <a href="#"> <i class="menu-icon fa fa-picture-o"></i>Images </a>
@@ -64,7 +64,7 @@
                         </li>
 
                         <h3 class="menu-title">Administration</h3><!-- /.menu-title -->
-                        <li>
+                        <li {% if 'app_admin_user_list' == app.request.attributes.get('_route') %}class="active"{% endif %}>
                             <a href="{{ path('app_admin_user_list') }}"> <i class="menu-icon fa fa-user"></i>Utilisateurs </a>
                         </li>
                         <li>
@@ -137,7 +137,7 @@
                 {% endif %}
             </div>
 
-            <div class="content mt-3">
+            <div class="content mt-3" id="contentHolder">
                 {% block content %}{% endblock %}
             </div> <!-- .content -->
         </div><!-- /#right-panel -->

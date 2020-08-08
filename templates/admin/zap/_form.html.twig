@@ -1,0 +1,80 @@
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.title, 'Titre', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-10">
+            {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.subtitle, 'Sous-titre', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-10">
+            {{ form_widget(form.subtitle, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.shortDescription, 'Description', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-10">
+            {{ form_widget(form.shortDescription, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.image, 'Image', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-10">
+            {% if zap|default %}
+                <img src="{{ asset(directory_zaps ~ zap.image) }}" alt="{{ zap }}" width="300px">
+            {% endif %}
+            {{ form_widget(form.image) }}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.type, 'Type', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-10">
+            {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.duration, 'Durée (en minutes)', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-10">
+            {{ form_widget(form.duration, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.link, 'Lien vidéo', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-10">
+            {{ form_widget(form.link, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div class="row form-group">
+        <div class="col col-md-2">
+            {{ form_label(form.status, 'Statut de publication', {'label_attr': {'class': 'form-control-label'}}) }}
+        </div>
+        <div class="col-12 col-md-10">
+            {{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    <div style="display:flex;justify-content:flex-end;">
+        <button type="submit" class="btn btn-outline-success"><i class="fa fa-check"></i>&nbsp;{{ button_label|default('Enregistrer') }}</button>
+    </div>
+{{ form_end(form) }}

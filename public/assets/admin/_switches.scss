@@ -44,9 +44,9 @@
     @if $type == ddd {
       background-color: $gray-100;
     } @else {
-      background-color: #fff;
+      background-color: $red;
     }
-    border: 1px solid $border-color;
+    border: 1px solid darken($red, 10%);
     border-radius: 2px;
     transition: opacity background 0.15s ease-out;
   }

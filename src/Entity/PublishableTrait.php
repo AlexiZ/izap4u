@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 trait PublishableTrait
 {
     static $STATUS_DRAFT = 'draft';

@@ -22,6 +22,17 @@ class ZapRepository extends ServiceEntityRepository
     }
 
     /**
+     * @return array|null
+     */
+    public function findAllAsArray(): ?array
+    {
+        return $this->createQueryBuilder('z')
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
+
+    /**
      * Latest zap by publication date
      *
      * @param string $type

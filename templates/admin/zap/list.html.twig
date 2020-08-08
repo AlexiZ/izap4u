@@ -1,0 +1,115 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Liste des zaps{% endblock %}
+
+{% block content %}
+    <div style="display:flex;flex-direction:row-reverse;margin-bottom:20px;">
+        <a href="{{ path('app_admin_zap_new') }}" type="button" class="btn btn-outline-primary"><i class="fa fa-plus"></i>&nbsp; Ajouter un zap</a>
+    </div>
+    <table id="datatableZapsList" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titre</th>
+                <th>Image</th>
+                <th>Type</th>
+                <th>Vues</th>
+                <th>Likes</th>
+                <th>Création</th>
+                <th>Dernière modification</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="/vendors/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/vendors/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+
+    <script>
+        const dateFormatter = dataDate => {
+            let date = new Date(Date.parse(dataDate)),
+                formatter = new Intl.DateTimeFormat('fr', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                })
+            return formatter.format(date)
+        }
+        let options = {
+            order: [[0, 'desc']],
+            ajax: {
+                url: '{{ path('app_admin_zap_jsonlist') }}',
+                dataSrc: ''
+            },
+            columns: [
+                {'data': 'id'},
+                {'data': 'title'},
+                {
+                    'data': 'image',
+                    'render': function (data, type, row, meta) {
+                        return '<img src="{{ directory_zaps }}' + data + '" style="max-width:200px">'
+                    }
+                },
+                {
+                    'data': 'type',
+                    'render': function (data, type, row, meta) {
+                        return 'long' === data ? '{{ 'zap.type.long'|trans }}' : '{{ 'zap.type.society'|trans }}'
+                    }
+                },
+                {'data': 'views'},
+                {'data': 'likes'},
+                {
+                    'data': 'createdAt',
+                    'render': function (data, type, row, meta) {
+                        if (data) {
+                            return '<b>' + row.createdBy + '</b> le <i>' + dateFormatter(data.date) + '</i>'
+                        }
+
+                        return null
+                    }
+                },
+                {
+                    'data': 'updatedAt',
+                    'render': function (data, type, row, meta) {
+                        if (data) {
+                            return '<b>' + row.updatedBy + '</b> le <i>' + dateFormatter(data.date) + '</i>'
+                        }
+
+                        return null
+                    }
+                },
+                {
+                    'data': 'status',
+                    'render': function (data, type, row, meta) {
+                        let badge = 'success', label = 'ON'
+                        if ('published' !== data) {
+                            badge = 'danger'
+                            label = 'OFF'
+                        }
+
+                        return '<span class="badge badge-' + badge + '">' + label + '</span>'
+                    }
+                },
+                {
+                    'data': 'id',
+                    'render': function (data, type, row, meta) {
+                        return '<a href="{{ path('app_admin_zap_edit', {'id': 9999}) }}" title="Modifier le zap"><i class="fa fa-2x fa-pencil"></i></a>'.replace('9999', data)
+                    }
+                }
+            ]
+        }
+        jQuery('#datatableZapsList').DataTable({...datatableOptions, ...options})
+    </script>
+{% endblock %}

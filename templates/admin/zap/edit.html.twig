@@ -1,0 +1,11 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Modifier {{ zap }}{% endblock %}
+
+{% block content %}
+    <div style="display:flex;justify-content:space-between;margin-bottom:20px;">
+        <a href="{{ path('app_admin_zap_list') }}" type="button" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i>&nbsp;Retour à la liste des zaps</a>
+    </div>
+
+    {{ include('admin/zap/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+{% endblock %}

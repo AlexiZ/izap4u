@@ -43,7 +43,7 @@
                         </li>
                         <h3 class="menu-title">Mes créations</h3><!-- /.menu-title -->
                         <li {% if 'app_admin_zap_list' == app.request.attributes.get('_route') %}class="active"{% endif %}>
-                            <a href="{{ path('app_admin_zap_list') }}"> <i class="menu-icon fa fa-video-camera"></i>Zaps </a>
+                            <a href="{{ path('app_admin_zap_list') }}"> <i class="menu-icon fa fa-video-camera"></i>Zaps et Society </a>
                         </li>
                         <li>
                             <a href="#"> <i class="menu-icon fa fa-picture-o"></i>Images </a>
@@ -51,16 +51,13 @@
 
                         <h3 class="menu-title">Contenus de pages</h3><!-- /.menu-title -->
                         <li>
-                            <a href="#"> <i class="menu-icon fa fa-globe"></i>Les restes du monde </a>
-                        </li>
-                        <li>
                             <a href="#"> <i class="menu-icon fa fa-music"></i>Du bon son </a>
                         </li>
                         <li>
-                            <a href="#"> <i class="menu-icon fa fa-play"></i>Les vidéos maison </a>
+                            <a href="#"> <i class="menu-icon fa fa-link"></i>Les liens proposés </a>
                         </li>
                         <li>
-                            <a href="#"> <i class="menu-icon fa fa-microphone"></i>Les documentaires </a>
+                            <a href="#"> <i class="menu-icon fa fa-google"></i>Contenus SEO </a>
                         </li>
 
                         <h3 class="menu-title">Administration</h3><!-- /.menu-title -->
@@ -68,7 +65,7 @@
                             <a href="{{ path('app_admin_user_list') }}"> <i class="menu-icon fa fa-user"></i>Utilisateurs </a>
                         </li>
                         <li>
-                            <a href="#"> <i class="menu-icon fa fa-google"></i>Contenus SEO </a>
+                            <a href="#"> <i class="menu-icon fa fa-cog"></i>Paramètres </a>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
@@ -84,7 +81,7 @@
                             <button class="search-trigger"><i class="fa fa-search"></i></button>
                             <div class="form-inline">
                                 <form class="search-form">
-                                    <input class="form-control mr-sm-2" type="text" placeholder="Search ..." aria-label="Search">
+                                    <input class="form-control mr-sm-2" type="text" placeholder="Rechercher..." aria-label="Search">
                                     <button class="search-close" type="submit"><i class="fa fa-close"></i></button>
                                 </form>
                             </div>

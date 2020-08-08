@@ -21,5 +21,3 @@ public/uploads
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
-
-/public/vendors/

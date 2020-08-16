@@ -21,4 +21,19 @@ class HomepageController extends AbstractController
             'latestSociety' => $this->getDoctrine()->getRepository('App:Zap')->getLatestByType('society'),
         ]);
     }
+
+    /**
+     * @Route("/horizontal")
+     *
+     * @return Response
+     */
+    public function index2()
+    {
+        return $this->render('homepage/index_horizontal.html.twig', [
+            'latestZap' => $this->getDoctrine()->getRepository('App:Zap')->getLatest(),
+            'zaps'      => $this->getDoctrine()->getRepository('App:Zap')->findBy([], ['publishedAt' => 'DESC'], 10),
+            'images'    => $this->getDoctrine()->getRepository('App:Image')->getLatest(10),
+            'societies' => $this->getDoctrine()->getRepository('App:Zap')->findBy([], ['publishedAt' => 'DESC'], 10),
+        ]);
+    }
 }

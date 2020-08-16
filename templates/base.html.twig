@@ -57,9 +57,11 @@
             </div>
         </nav>
 
-        <section class="section">
-            {% block body %}{% endblock %}
-        </section>
+        {% block upper_body %}
+            <section class="section">
+                {% block body %}{% endblock %}
+            </section>
+        {% endblock %}
 
         <script src="{{ asset('scripts.min.js') }}"></script>
         {% block javascripts %}{% endblock %}

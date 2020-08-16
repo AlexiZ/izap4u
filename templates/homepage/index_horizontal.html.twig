@@ -1,0 +1,160 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <style>
+        #homepageLatestZap {
+            background-image: url('{{ latestZap|default ? asset(directory_zaps ~ latestZap.image) : 'https://place-hold.it/640x450' }}');
+            background-position: center;
+            background-size: cover;
+            width: 100%;
+            margin-top: 88px;
+            height: 600px;
+            padding: 1.5rem 4rem;
+        }
+        #homepageLatestZap h1 {
+            text-shadow: -1px -1px 0 #b3685d, -1px 0 0 #b3685d, -1px 1px 0 #b3685d, 0 -1px 0 #b3685d, 0 0 0 #b3685d, 0 1px 0 #b3685d, 1px -1px 0 #b3685d, 1px 0 0 #b3685d, 1px 1px 0 #b3685d;
+            font-style: italic;
+            font-weight: 800;
+            color: rgba(0,0,0,.9);
+            font-size: 72px;
+        }
+        #homepageLatestZap .shortDescription {
+            width: 500px;
+            text-align: justify;
+            font-family: 'Poppins', "Open Sans";
+        }
+        #homepageLatestZap .details {
+            margin: 20px;
+            font-style: italic;
+        }
+        #homepageLatestZap .button {
+            font-weight: bold;
+        }
+        #homepageLatestZap .button:hover {
+            color: grey;
+        }
+
+        .section {
+            margin-left: 20px;
+            padding: 1.5rem;
+        }
+        #lesZaps.section {
+            margin-top: -100px;
+        }
+        #lesSocieties.section {
+            margin-top: -20px;
+        }
+        .columns {
+            overflow: hidden;
+            position: relative;
+            padding-top: 10px;
+        }
+        h2 {
+            font-weight: bolder;
+            font-size: 24px;
+            font-variant: small-caps;
+        }
+        .column {
+            padding: 2px;
+        }
+
+        .scroll-previous, .scroll-next {
+            border: none;
+            background: #00000075;
+            color: white;
+            height: 100%;
+            cursor: pointer;
+        }
+    </style>
+{% endblock %}
+
+{% block upper_body %}
+    <div id="homepageLatestZap">
+        <a href="{{ latestZap|default ? path('app_zap_show', {'zapId': latestZap.id}) }}" title="{{ latestZap }}">
+            <h1 class="title">{{ latestZap.title|default('ZAP #000')|u.upper }}</h1>
+            <h2 class="subtitle">{{ latestZap.subtitle|default('lipsum.short'|trans)|u.upper }}</h2>
+            <p class="shortDescription">{{ latestZap.shortDescription|default('lipsum.long'|trans)|u.truncate(400, '...') }}</p>
+            <p class="details"><span>{{ 'homepage.latest_zap.details'|trans({'%views%': latestZap.views|default(0)}) }}</span>&nbsp;&nbsp;|&nbsp;&nbsp;<span>{{ latestZap.publishedAt|default('now')|date('d.m.Y') }}</span></p>
+            <button class="button"><i class="fas fa-play"></i>&nbsp;&nbsp;Voir le Zap</button>
+        </a>
+    </div>
+
+    <div id="lesZaps" class="section">
+        <h2>Les derniers Zaps</h2>
+        <button class="scroll-previous" type="button"><i class="fas fa-2x fa-angle-left"></i></button>
+        <button class="scroll-next" type="button"><i class="fas fa-2x fa-angle-right"></i></button>
+        <div class="columns scrollable">
+            {% for zap in zaps %}
+                <div class="unZap column is-one-fifth">
+                    <a href="{{ path('app_zap_show', {'zapId': zap.id}) }}">
+                        <img src="{{ asset(directory_zaps ~ zap.image) }}" alt="{{ zap }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="lesSocieties" class="section">
+        <h2>Les derniers Society</h2>
+        <button class="scroll-previous" type="button"><i class="fas fa-2x fa-angle-left"></i></button>
+        <button class="scroll-next" type="button"><i class="fas fa-2x fa-angle-right"></i></button>
+        <div class="columns scrollable">
+            {% for society in societies %}
+                <div class="unZap column is-one-fifth">
+                    <a href="{{ path('app_zap_show', {'zapId': society.id}) }}">
+                        <img src="{{ asset(directory_zaps ~ society.image) }}" alt="{{ society }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="lesImages" class="section">
+        <h2>Les dernières images</h2>
+        <button class="scroll-previous" type="button"><i class="fas fa-2x fa-angle-left"></i></button>
+        <button class="scroll-next" type="button"><i class="fas fa-2x fa-angle-right"></i></button>
+        <div class="columns scrollable">
+            {% for image in images %}
+                <div class="unZap column is-one-fifth">
+                    <a href="{{ path('app_zap_show', {'zapId': image.id}) }}">
+                        <img src="{{ asset(directory_images ~ image.image) }}" alt="{{ image }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        const sideScroll = (element, direction, speed, distance, step) => {
+            scrollAmount = 0
+            let slideTimer = setInterval(() => {
+                if (direction === 'left') {
+                    element.scrollLeft -= step
+                } else {
+                    element.scrollLeft += step
+                }
+                scrollAmount += step
+                if (scrollAmount >= distance) {
+                    window.clearInterval(slideTimer)
+                }
+            }, speed)
+        }
+
+        let scrollableContainers = document.querySelectorAll('.scrollable')
+        scrollableContainers.forEach(scrollableContainer => {
+            let previous = scrollableContainer.parentElement.querySelector('.scroll-previous'),
+                next = scrollableContainer.parentElement.querySelector('.scroll-next')
+
+            next.onclick = () => {
+                sideScroll(scrollableContainer, 'right', 5, 500, 10)
+            }
+
+            previous.onclick = () => {
+                sideScroll(scrollableContainer, 'left', 5, 500, 10)
+            }
+        })
+    </script>
+{% endblock %}
